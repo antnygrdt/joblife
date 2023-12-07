@@ -1,0 +1,48 @@
+.roster-page {
+    color: white;
+}
+
+.roster-list {
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style-type: none;
+    height: 390px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #888888 #f1f1f1;
+}
+
+.roster-list h1 {
+    margin-left: 25px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+}
+
+.roster-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.roster-list::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+.roster-list::-webkit-scrollbar-thumb {
+    background-color: #888888;
+    border-radius: 4px;
+}
+
+.roster-list::-webkit-scrollbar-thumb:hover {
+    background-color: #888888;
+}
+
+.roster-list::-webkit-scrollbar-thumb:active {
+    background-color: #888888;
+}
+
+@media not all and (hover: none) {
+    .roster-list::-webkit-scrollbar-thumb {
+        border-radius: 0;
+    }
+}

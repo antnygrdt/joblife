@@ -1,0 +1,63 @@
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1b2c62;
+    padding-bottom: 4px;
+    padding-top: 10px;
+
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    border-top: 2px solid white;
+}
+
+.bottom-bar img {
+    transform: scale(0.8);
+}
+
+.bottom-bar .twitter img {
+    width: 35px;
+}
+
+.bottom-bar .youtube img {
+    width: 42px;
+}
+
+.bottom-bar .instagram img {
+    width: 28px;
+}
+
+.bottom-bar .tiktok img {
+    width: 25px;
+}
+
+.bottom-bar .website img {
+    width: 230px;
+}
+
+.bottom-bar .spacer {
+    margin: 0px 5px;
+}
+
+.bottom-bar .spacer-up {
+    margin: 50px 0px;
+}
+
+.image-container img {
+    transition: transform 0.1s ease-in-out;
+}
+
+.image-container:hover img {
+    transform: scale(1.1);
+}
+
+.website img {
+    transition: transform 0.2s ease-in-out;
+}
+
+.website:hover img {
+    transform: scale(0.9);
+}

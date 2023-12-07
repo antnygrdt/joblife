@@ -1,0 +1,34 @@
+.upper-bar {
+    width: 100%;
+    background-color: #1b2c62;
+    padding: 15px 0px;
+    position: relative;
+    text-align: center;
+}
+
+.upper-bar .logo {
+    display: inline-block;
+}
+
+.upper-bar .settings {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+}
+
+.upper-bar .settings {
+    align-items: end;
+}
+
+.upper-bar .logo img {
+    width: 40px;
+}
+
+.upper-bar .settings img {
+    width: 35px;
+}
+
+.upper-bar .settings:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
