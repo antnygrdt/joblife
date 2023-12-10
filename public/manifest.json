@@ -3,16 +3,19 @@
   "name": "Joblife",
   "version": "1.0.2",
   "description": "Suivez l'actualité des matchs, des nouvelles vidéos, des streams des joueurs et des annonces de l'équipe Joblife.",
-  "action": {
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "tsuyodevcontact@gmail.com"
+    }
+  },
+  "browser_action": {
     "default_popup": "popup.html",
     "default_title": "Joblife"
   },
   "permissions": [
     "storage",
     "notifications",
-    "alarms"
-  ],
-  "host_permissions": [
+    "alarms",
     "*://*.asakicorp.com/*",
     "*://*.youtube.com/*"
   ],

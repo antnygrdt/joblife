@@ -1,9 +1,9 @@
-chrome.runtime.onStartup.addListener(() => {
+browser.runtime.onStartup.addListener(() => {
     console.log(`WORKER STARTUP`);
 });
 
 function dp() {
-    chrome.storage.local.get('JOBLIFE_PARAMETERS', (result) => {
+    browser.storage.local.get('JOBLIFE_PARAMETERS', (result) => {
         const jp = result.JOBLIFE_PARAMETERS;
         var dataToUpdate = {};
 
@@ -18,7 +18,7 @@ function dp() {
             }
         }
 
-        chrome.storage.local.set({
+        browser.storage.local.set({
             JOBLIFE_PARAMETERS: dataToUpdate
         });
     });
@@ -30,7 +30,7 @@ function fs() {
     fetch('https://api.asakicorp.com/joblife/twitch')
         .then(response => response.json())
         .then(data => {
-            chrome.storage.local.set({
+            browser.storage.local.set({
                 JOBLIFE_STREAMERS: data
             });
         })
@@ -39,7 +39,7 @@ function fs() {
     fetch('https://api.asakicorp.com/joblife/youtube')
         .then(response => response.json())
         .then(data => {
-            chrome.storage.local.set({
+            browser.storage.local.set({
                 JOBLIFE_YOUTUBE_VIDEOS: data
             });
         })
@@ -48,7 +48,7 @@ function fs() {
     fetch('https://api.asakicorp.com/joblife/matches')
         .then(response => response.json())
         .then(data => {
-            chrome.storage.local.set({
+            browser.storage.local.set({
                 JOBLIFE_MATCHES: data
             });
         })
@@ -57,7 +57,7 @@ function fs() {
     fetch('https://api.asakicorp.com/joblife/teams')
         .then(response => response.json())
         .then(data => {
-            chrome.storage.local.set({
+            browser.storage.local.set({
                 JOBLIFE_TEAMS: data
             });
         })
@@ -66,7 +66,7 @@ function fs() {
     fetch('https://api.asakicorp.com/joblife/rosters')
         .then(response => response.json())
         .then(data => {
-            chrome.storage.local.set({
+            browser.storage.local.set({
                 JOBLIFE_ROSTERS: data
             });
         })
@@ -75,13 +75,13 @@ function fs() {
     fetch('https://api.asakicorp.com/joblife/security')
         .then(response => response.json())
         .then(data => {
-            chrome.storage.local.set({
+            browser.storage.local.set({
                 JOBLIFE_SECURITY: data
             });
         })
         .catch(error => { });
 
-    chrome.storage.local.get('LAST_NOTIFICATION', (result) => {
+    browser.storage.local.get('LAST_NOTIFICATION', (result) => {
         fetch('https://api.asakicorp.com/joblife/notification')
             .then(response => response.json())
             .then(data => {
@@ -89,7 +89,7 @@ function fs() {
                     if (result.LAST_NOTIFICATION.id !== data.id) {
 
                         const notifId = data.id.split("-")[0];
-                        chrome.storage.local.get('JOBLIFE_PARAMETERS', (result) => {
+                        browser.storage.local.get('JOBLIFE_PARAMETERS', (result) => {
                             if (result.JOBLIFE_PARAMETERS !== undefined) {
                                 const jp = result.JOBLIFE_PARAMETERS;
                                 if (jp[notifId] !== undefined && jp[notifId] === true) {
@@ -100,7 +100,7 @@ function fs() {
                     } else return;
                 }
 
-                chrome.storage.local.set({
+                browser.storage.local.set({
                     LAST_NOTIFICATION: data
                 })
             })
@@ -109,18 +109,18 @@ function fs() {
 }
 
 function b() {
-    chrome.storage.local.get('JOBLIFE_STREAMERS', (result) => {
+    browser.storage.local.get('JOBLIFE_STREAMERS', (result) => {
         const n = result.JOBLIFE_STREAMERS.filter(s => s.isStreaming).length;
-        chrome.action.setBadgeText({ text: n.toString() });
-        chrome.action.setBadgeTextColor({ color: n > 0 ? "white" : "black" })
-        chrome.action.setBadgeBackgroundColor({ color: n > 0 ? "#d66064" : "#D3D3D3" })
+        browser.browserAction.setBadgeText({ text: n.toString() });
+        browser.browserAction.setBadgeTextColor({ color: n > 0 ? "white" : "black" })
+        browser.browserAction.setBadgeBackgroundColor({ color: n > 0 ? "#d66064" : "#D3D3D3" })
 
-        chrome.action.setTitle({ title: n < 1 ? "Aucun joueur en live" : n + " joueur" + (n > 1 ? "s" : "") + " en live" })
+        browser.browserAction.setTitle({ title: n < 1 ? "Aucun joueur en live" : n + " joueur" + (n > 1 ? "s" : "") + " en live" })
     })
 }
 
 function sn(notification) {
-    chrome.storage.local.get('JOBLIFE_SECURITY', (result) => {
+    browser.storage.local.get('JOBLIFE_SECURITY', (result) => {
         if (result.JOBLIFE_SECURITY == undefined) return;
 
         const hasNotification = result.JOBLIFE_SECURITY.notification;
@@ -151,10 +151,10 @@ function sn(notification) {
                 }
             }
 
-            chrome.notifications.create(notification.id, details, function (notificationId) {
-                chrome.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
+            browser.notifications.create(notification.id, details, function (notificationId) {
+                browser.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
                     if (notifId === notificationId && btnIdx === 0) {
-                        chrome.tabs.create({ url: notification.button.action })
+                        browser.tabs.create({ url: notification.button.action })
                     }
                 });
             });
@@ -174,11 +174,11 @@ setInterval(() => {
     setTimeout(b, 1e3)
 }, 3e4);
 
-chrome.alarms.create("KEEP_ALIVE", {
+browser.alarms.create("KEEP_ALIVE", {
     delayInMinutes: 1,
     periodInMinutes: 1
 })
 
-chrome.alarms.onAlarm.addListener((t => {
+browser.alarms.onAlarm.addListener((t => {
     console.log("worker keep alive")
 }))
