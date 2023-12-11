@@ -1,3 +1,5 @@
+$poppins: 'Poppins', sans-serif;
+
 .settingsBg {
     width: 100vw;
     height: 100vh;
@@ -5,7 +7,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     top: 0;
     left: 0;
     color: white;
@@ -21,118 +22,110 @@
     flex-direction: column;
     overflow: hidden;
     padding-bottom: 15px;
-}
 
-.settingsContainer.active {
-    transition: transform 0.3s ease;
-}
+    &.active {
+        transition: transform 0.3s ease;
+    }
 
-.settingsContainer .header {
-    border-radius: 12px 12px 0 0;
-    position: relative;
-    text-align: center;
-    background-color: #253d55;
-    padding: 8px 0px;
-}
+    .header {
+        border-radius: 12px 12px 0 0;
+        position: relative;
+        text-align: center;
+        background-color: #253d55;
+        padding: 8px 0px;
 
-.settingsContainer .header h1 {
-    margin: 0;
-}
+        h1 {
+            margin: 0;
+        }
+    }
 
-.settingsContainer .closeBtn {
-    position: absolute;
-    right: 14px;
-    top: 17px;
-}
+    .closeBtn {
+        position: absolute;
+        right: 14px;
+        top: 17px;
 
-.settingsContainer .closeBtn img {
-    width: 20px;
-}
+        img {
+            width: 20px;
 
-.settingsContainer .closeBtn img:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-}
+            &:hover {
+                transform: scale(1.2);
+                cursor: pointer;
+            }
+        }
+    }
 
-.settingsContainer .parameter {
-    display: flex;
-    justify-content: space-between;
-    padding-right: 10px;
-}
+    .parameter {
+        display: flex;
+        justify-content: space-between;
+        padding-right: 10px;
 
-.settingsContainer .parameter p {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-}
+        p {
+            margin: 0;
+            font-family: $poppins;
+        }
 
-.settingsContainer .category {
-    padding-left: 12px;
-}
+        input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            border: 2px solid #000;
+            border-radius: 4px;
+        }
 
-.settingsContainer .category h2 {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    text-decoration: underline;
-}
+        select {
+            font-size: 12px;
+            font-family: $poppins;
+            padding: 2px;
+            border-radius: 4px;
+            background-color: #333;
+            color: white;
+            border: 1px solid #555;
+        }
+    }
 
-.parameter {
-    display: flex;
-    align-items: center;
-}
+    .category {
+        padding-left: 12px;
 
-.parameter input[type="checkbox"] {
-    width: 15px;
-    height: 15px;
-    border: 2px solid #000;
-    border-radius: 4px;
-}
+        h2 {
+            margin-top: 15px;
+            margin-bottom: 5px;
+            text-decoration: underline;
+        }
+    }
 
-.parameter select {
-    font-size: 12px;
-    font-family: 'Poppins', sans-serif;
-    padding: 2px;
-    border-radius: 4px;
-    background-color: #333;
-    color: #fff;
-    border: 1px solid #555;
-}
+    .contact {
+        font-family: $poppins;
+        padding-left: 12px;
+        margin-top: 18px;
 
-.settingsContainer .contact {
-    font-family: 'Poppins', sans-serif;
-    padding-left: 12px;
-    margin-top: 18px;
-}
+        h3 {
+            margin-bottom: 0;
+            text-decoration: underline;
+        }
+    }
 
-.settingsContainer .contact h3 {
-    margin-bottom: 0;
-    text-decoration: underline;
-}
+    .body {
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #888888 #f1f1f1;
 
-.settingsContainer .body {
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #888888 #f1f1f1;
-}
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
 
-.settingsContainer .body::-webkit-scrollbar {
-    width: 8px;
-}
+        &::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
 
-.settingsContainer .body::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-}
+        &::-webkit-scrollbar-thumb {
+            background-color: #888888;
+            border-radius: 4px;
 
-.settingsContainer .body::-webkit-scrollbar-thumb {
-    background-color: #888888;
-    border-radius: 4px;
-}
-
-.settingsContainer .body::-webkit-scrollbar-thumb:hover {
-    background-color: #888888;
-}
-
-.settingsContainer .body::-webkit-scrollbar-thumb:active {
-    background-color: #888888;
+            &:hover,
+            &:active {
+                background-color: #888888;
+            }
+        }
+    }
 }
 
 @media not all and (hover: none) {

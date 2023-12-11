@@ -1,25 +1,22 @@
-.game-header {
+.game-header,
+.game {
     display: flex;
     justify-content: space-between;
-    background-color: #1b2c62;
-    color: white;
-    padding: 8px 8px;
-
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 14px;
 }
 
+.game-header {
+    background-color: #1b2c62;
+    color: white;
+    padding: 8px 8px;
+}
+
 .game {
-    display: flex;
-    justify-content: space-between;
     background-color: #dfdfdf;
     color: black;
     padding: 10px 8px;
-
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
 }
 
 .game-card p {

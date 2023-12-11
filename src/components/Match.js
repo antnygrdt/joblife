@@ -84,7 +84,7 @@ const Match = ({ match }) => {
             {unrolled &&
                 <div className='footer'>
                     <ul className='game-list'>
-                        <h2 className='line'><span>Détails</span></h2>
+                        <h2 className='line'><span>DÉTAILS</span></h2>
                         {Object.entries(match.games).map(([key, game], index) => (
                             <li key={`game-${index}`}>
                                 <Game match={match} game={game} index={index} />

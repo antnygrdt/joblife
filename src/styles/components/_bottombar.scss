@@ -1,9 +1,13 @@
+$bg-color: #1b2c62;
+$border-color: #ffffff;
+$img-scale: 0.8;
+
 .bottom-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: #1b2c62;
+    background-color: $bg-color;
     padding-bottom: 4px;
     padding-top: 10px;
 
@@ -11,39 +15,39 @@
     justify-content: center;
     gap: 8px;
 
-    border-top: 2px solid white;
-}
+    border-top: 2px solid $border-color;
 
-.bottom-bar img {
-    transform: scale(0.8);
-}
+    img {
+        transform: scale($img-scale);
+    }
 
-.bottom-bar .twitter img {
-    width: 35px;
-}
+    .twitter img {
+        width: 35px;
+    }
 
-.bottom-bar .youtube img {
-    width: 42px;
-}
+    .youtube img {
+        width: 42px;
+    }
 
-.bottom-bar .instagram img {
-    width: 28px;
-}
+    .instagram img {
+        width: 28px;
+    }
 
-.bottom-bar .tiktok img {
-    width: 25px;
-}
+    .tiktok img {
+        width: 25px;
+    }
 
-.bottom-bar .website img {
-    width: 230px;
-}
+    .website img {
+        width: 230px;
+    }
 
-.bottom-bar .spacer {
-    margin: 0px 5px;
-}
+    .spacer {
+        margin: 0px 5px;
+    }
 
-.bottom-bar .spacer-up {
-    margin: 50px 0px;
+    .spacer-up {
+        margin: 50px 0px;
+    }
 }
 
 .image-container img {

@@ -1,73 +1,69 @@
+$nav-bg-color: #1b2c62;
+$hover-bg-color: rgba(20, 33, 77, 0.5);
+$selected-bg-color: rgba(20, 33, 77, 0.8);
+
 .navigation {
-    border-bottom: 2px solid #ffffff;
+    border-bottom: 2px solid white;
     text-decoration: none;
-    background-color: #1b2c62;
+    background-color: $nav-bg-color;
     padding-top: 5px;
+
+    ul {
+        list-style-type: none;
+        justify-content: center;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        flex: 1;
+        position: relative;
+        z-index: 1;
+
+        &.selected::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $selected-bg-color;
+            z-index: -1;
+        }
+
+        &:not(.selected):hover::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: $hover-bg-color;
+            z-index: -1;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            height: 20px;
+        }
+
+        p {
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            text-align: center;
+        }
+    }
+
+    .link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+    }
 }
-
-.navigation ul {
-    list-style-type: none;
-    justify-content: center;
-    display: flex;
-
-    margin: 0;
-    padding: 0;
-}
-
-.navigation li {
-    flex: 1;
-}
-
-.navigation li {
-    position: relative;
-    z-index: 1;
-}
-
-.navigation li.selected::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(20, 33, 77, 0.8);
-    z-index: -1;
-}
-
-.navigation li:not(.selected):hover::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(20, 33, 77, 0.5);
-    z-index: -1;
-}
-
-.navigation li a {
-    text-decoration: none;
-}
-
-.navigation li img {
-    height: 20px;
-}
-
-.navigation li p {
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    text-align: center;
-}
-
-.navigation .link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-grow: 1;
-}
-
-//  .navigation li:hover {
-//      transform: scale(1.3);
-//  }

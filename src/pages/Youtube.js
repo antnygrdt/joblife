@@ -29,7 +29,7 @@ const Youtube = () => {
         <div >
             <div className={`fade-in${fadeIn ? ' active' : ''}`}>
                 <div className='videos'>
-                    <h1>Dernières vidéos</h1>
+                    <h1>DERNIÈRES VIDÉOS</h1>
                     <div className='video-row'>
                         {videos
                             .map((video) => (
