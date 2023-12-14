@@ -135,7 +135,6 @@ function sn(notification) {
                     iconUrl: notification.icon,
                     title: notification.title,
                     message: notification.message,
-                    buttons: [{ title: notification.button.title }],
                     priority: 2
                 }
 
@@ -146,17 +145,16 @@ function sn(notification) {
                     imageUrl: notification.image,
                     title: notification.title,
                     message: notification.message,
-                    buttons: [{ title: notification.button.title }],
                     priority: 2
                 }
             }
 
-            browser.notifications.create(notification.id, details, function (notificationId) {
-                browser.notifications.onButtonClicked.addListener(function (notifId, btnIdx) {
-                    if (notifId === notificationId && btnIdx === 0) {
-                        browser.tabs.create({ url: notification.button.action })
-                    }
-                });
+            browser.notifications.create(notification.id, details);
+
+            browser.notifications.onClicked.addListener((notificationId) => {
+                if (notificationId === notification.id) {
+                    browser.tabs.create({ url: notification.button.action });
+                }
             });
         }
     })

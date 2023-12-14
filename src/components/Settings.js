@@ -12,7 +12,6 @@ const Settings = ({ setOpenSettings }) => {
         chrome.storage.local.get('JOBLIFE_PARAMETERS', (result) => {
             if (result.JOBLIFE_PARAMETERS !== undefined) {
                 const jp = result.JOBLIFE_PARAMETERS;
-                console.log(jp);
                 setSettings(jp);
             }
         });
