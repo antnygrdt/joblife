@@ -73,7 +73,12 @@ const Calendar = () => {
                             <div className="matchs">
                                 <ul className={'match-list'}>
                                     {Object.values(matchs)
-                                        .sort((a, b) => (page === "finished") ? (b.id - a.id) : (a.id - b.id))
+                                        .sort((a, b) => {
+                                            const dateA = new Date(a.scheduled_at);
+                                            const dateB = new Date(b.scheduled_at);
+
+                                            return (page === "finished") ? (dateB - dateA) : (dateA - dateB);
+                                        })
                                         .map((match) => (
                                             <li key={match.id}>
                                                 <Match match={match} />

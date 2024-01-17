@@ -44,7 +44,6 @@
     max-height: 340px;
     overflow: auto;
     scrollbar-width: thin;
-    scrollbar-color: #d66064 #F0FFFF;
 }
 
 .match-list::-webkit-scrollbar {
@@ -60,16 +59,16 @@
 }
 
 .match-list::-webkit-scrollbar-thumb {
-    background-color: #d66064;
+    background-color: gray;
     border-radius: 4px;
 }
 
 .match-list::-webkit-scrollbar-thumb:hover {
-    background-color: #b15051;
+    background-color: #535353;
 }
 
 .match-list::-webkit-scrollbar-thumb:active {
-    background-color: #b15051;
+    background-color: #4d4d4d;
 }
 
 @media not all and (hover: none) {

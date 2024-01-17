@@ -70,9 +70,9 @@ const Match = ({ match }) => {
                     {isFinished &&
                         <p className={'wl ' + (match.team1.id === winner.id ? "V" : "D")}>{match.team1.id === winner.id ? "WIN" : "LOSE"}</p>
                     }
-                    <img src={match.team1.avatar} alt={match.team1.name} />
+                    <img src={match.team1.avatar} alt={match.team1.name} title={match.team1.name} />
                     <p className={"teams-hint"}>{teamsHint}</p>
-                    <img src={match.team2.avatar} alt={match.team2.name} />
+                    <img src={match.team2.avatar} alt={match.team2.name} title={match.team2.name} />
                     {isFinished &&
                         <p className={'wl ' + (match.team2.id === winner.id ? "V" : "D")}>{match.team2.id === winner.id ? "WIN" : "LOSE"}</p>
                     }
