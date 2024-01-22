@@ -14,10 +14,6 @@ body {
     -moz-user-select: none;
     -o-user-select: none;
     user-select: none;
-
-    .tooltip {
-        user-select: all;
-    }
 }
 
 body::-webkit-scrollbar {

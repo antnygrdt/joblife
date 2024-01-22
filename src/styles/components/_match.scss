@@ -3,6 +3,7 @@
 
     .header {
         display: flex;
+        position: relative;
         justify-content: center;
         border-radius: 10px 10px 0 0;
         background-color: #d66064;
@@ -12,6 +13,20 @@
         font-weight: 700;
         font-size: 14px;
         letter-spacing: 0.8px;
+
+        &.matchday {
+            animation: matchday 2s infinite;
+            transform: translateZ(0);
+        }
+
+        .running {
+            display: flex;
+            position: absolute;
+            align-items: center;
+            right: 6px;
+            bottom: 1px;
+            animation: runn 2s infinite;
+        }
 
         p {
             margin: 8px 0px;
@@ -160,10 +175,24 @@ h2.line {
     }
 
     50% {
-        background-color: #ff0000;
+        background-color: #ec0101;
     }
 
     100% {
         background-color: #d66064;
+    }
+}
+
+@keyframes runn {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.8);
+    }
+
+    100% {
+        transform: scale(1);
     }
 }

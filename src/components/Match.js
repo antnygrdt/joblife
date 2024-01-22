@@ -9,12 +9,13 @@ const Match = ({ match }) => {
         return null;
     }
 
-    const isFinished = match.status === "finished";
+    let isFinished = match.status === "finished";
 
     const date = moment.utc(match.scheduled_at).locale('fr');
     const now = moment();
 
     const isToday = date.isSame(now, 'day');
+    const isRunning = match.status === "running";
 
     const duration = moment.duration(now.diff(date));
 
@@ -25,7 +26,7 @@ const Match = ({ match }) => {
     if (days > 6 || !isFinished) {
         dateFormat = date.format('dddd D MMMM YYYY').toUpperCase();
     } else if (days >= 1) {
-        dateFormat = `Il y a ${Math.floor(days)} jours`;
+        dateFormat = `Il y a ${Math.floor(days)} jour${days > 1 ? 's' : ''}`;
     } else if (hours >= 1) {
         dateFormat = `Il y a ${Math.floor(hours)} heures`;
     } else dateFormat = 'Il y a 1 heure';
@@ -33,35 +34,33 @@ const Match = ({ match }) => {
     const hourFormat = date.format('HH:mm');
 
 
-    var teamsHint = null;
-    var winner = null;
-    if (isFinished) {
+    let teamsHint = null, winner = null;
+    if (isFinished || isRunning) {
         winner = match.winner_id === match.team1.id ? match.team1 : match.winner_id === match.team2.id ? match.team2 : null;
-        if (winner == null) return;
+        if (winner === null && !isRunning) return;
 
-        var wins1 = 0, wins2 = 0;
-        Object.entries(match.games).forEach(([key, game]) => {
-            const gameWinner = game.winner_id === match.team1.id ? match.team1 : game.winner_id === match.team2.id ? match.team2 : null;
-            if (gameWinner == null) return;
-
-            if (gameWinner.id === match.team1.id) {
+        let [wins1, wins2] = [0, 0];
+        for (let game of Object.values(match.games)) {
+            const gameWinnerId = game.winner_id;
+            if (gameWinnerId === match.team1.id) {
                 wins1++;
-            } else if (gameWinner.id === match.team2.id) {
+            } else if (gameWinnerId === match.team2.id) {
                 wins2++;
-            } else {
-                return;
             }
-        });
+        }
 
-        teamsHint = wins1 + " - " + wins2;
+        teamsHint = `${wins1} - ${wins2}`;
     } else {
         teamsHint = hourFormat;
     }
 
     return (
         <div className='match-card'>
-            <div className={"header" + (isToday ? " matchday" : "")}>
+            <div className={"header" + (isToday && !isRunning ? " matchday" : "")}>
                 <p>{dateFormat}</p>
+                {isRunning && <div className='running '>
+                    <p title='En cours...'>🔴</p>
+                </div>}
             </div>
             <div className={"match " + match.status + (unrolled ? ' unrolled' : '')} onClick={() => setUnroll(!unrolled)}>
                 <div className="league">
