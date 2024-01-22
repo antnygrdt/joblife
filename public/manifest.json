@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Joblife",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Suivez l'actualité des matchs, des nouvelles vidéos, des streams des joueurs et des annonces de l'équipe Joblife.",
   "browser_specific_settings": {
     "gecko": {
