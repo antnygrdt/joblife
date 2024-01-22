@@ -14,6 +14,8 @@ const Match = ({ match }) => {
     const date = moment.utc(match.scheduled_at).locale('fr');
     const now = moment();
 
+    const isToday = date.isSame(now, 'day');
+
     const duration = moment.duration(now.diff(date));
 
     const days = duration.asDays();
@@ -58,7 +60,7 @@ const Match = ({ match }) => {
 
     return (
         <div className='match-card'>
-            <div className='header'>
+            <div className={"header" + (isToday ? " matchday" : "")}>
                 <p>{dateFormat}</p>
             </div>
             <div className={"match " + match.status + (unrolled ? ' unrolled' : '')} onClick={() => setUnroll(!unrolled)}>

@@ -27,6 +27,15 @@ function dp() {
 function fs() {
     console.log('requests')
 
+    fetch('https://api.asakicorp.com/joblife/constants')
+        .then(response => response.json())
+        .then(data => {
+            browser.storage.local.set({
+                JOBLIFE_SOCIALS: data.socials
+            });
+        })
+        .catch(error => { });
+
     fetch('https://api.asakicorp.com/joblife/twitch')
         .then(response => response.json())
         .then(data => {
@@ -121,33 +130,20 @@ function b() {
 
 function sn(notification) {
     browser.storage.local.get('JOBLIFE_SECURITY', (result) => {
-        if (result.JOBLIFE_SECURITY == undefined) return;
+        if (result.JOBLIFE_SECURITY === undefined) return;
 
         const hasNotification = result.JOBLIFE_SECURITY.notification;
         if (hasNotification) {
             var check = ((Date.now() - notification.timestamp) / 60000) <= 5;
             if (!check) return;
 
-            let details;
-            if (notification.image === undefined) {
-                details = {
-                    type: "basic",
-                    iconUrl: notification.icon,
-                    title: notification.title,
-                    message: notification.message,
-                    priority: 2
-                }
-
-            } else {
-                details = {
-                    type: "image",
-                    iconUrl: notification.icon,
-                    imageUrl: notification.image,
-                    title: notification.title,
-                    message: notification.message,
-                    priority: 2
-                }
-            }
+            let details = {
+                type: "basic",
+                iconUrl: notification.icon,
+                title: notification.title,
+                message: notification.message,
+                priority: 2
+            };
 
             browser.notifications.create(notification.id, details);
 

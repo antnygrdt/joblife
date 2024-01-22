@@ -1,12 +1,3 @@
-$color-black: black;
-$color-white: white;
-$color-light-blue: #F0FFFF;
-$color-red: #d66064;
-$color-green: green;
-$font-roboto: 'Roboto', sans-serif;
-$font-josefin: 'Josefin Sans', sans-serif;
-$font-montserrat: 'Montserrat', sans-serif;
-
 .match-card {
     margin-bottom: 10px;
 
@@ -14,9 +5,10 @@ $font-montserrat: 'Montserrat', sans-serif;
         display: flex;
         justify-content: center;
         border-radius: 10px 10px 0 0;
-        background-color: $color-red;
-        color: $color-white;
-        font-family: $font-roboto;
+        background-color: #d66064;
+
+        color: white;
+        font-family: 'Roboto', sans-serif;
         font-weight: 700;
         font-size: 14px;
         letter-spacing: 0.8px;
@@ -29,8 +21,8 @@ $font-montserrat: 'Montserrat', sans-serif;
     .footer {
         align-items: center;
         border-radius: 0 0 10px 10px;
-        background-color: $color-light-blue;
-        color: $color-black;
+        background-color: #F0FFFF;
+        color: black;
     }
 }
 
@@ -39,10 +31,10 @@ $font-montserrat: 'Montserrat', sans-serif;
     display: flex;
     justify-content: space-between;
     padding: 4px 0px;
-    background-color: $color-light-blue;
+    background-color: #F0FFFF;
     border-radius: 0 0 10px 10px;
-    color: $color-black;
-    font-family: $font-josefin;
+    color: black;
+    font-family: 'Josefin Sans', sans-serif;
     font-weight: 600;
     height: 30px;
 
@@ -69,7 +61,7 @@ $font-montserrat: 'Montserrat', sans-serif;
     .team {
         left: 50%;
         transform: translateX(-50%);
-        font-family: $font-roboto;
+        font-family: 'Roboto', sans-serif;
         font-weight: 700;
     }
 
@@ -81,16 +73,16 @@ $font-montserrat: 'Montserrat', sans-serif;
     }
 
     .wl {
-        font-family: $font-montserrat;
+        font-family: 'Montserrat', sans-serif;
         font-weight: 500;
         width: 50px;
 
         &.V {
-            color: $color-green;
+            color: green;
         }
 
         &.D {
-            color: $color-red;
+            color: #d66064;
         }
     }
 
@@ -106,7 +98,7 @@ $font-montserrat: 'Montserrat', sans-serif;
     }
 
     .schedule {
-        font-family: $font-roboto;
+        font-family: 'Roboto', sans-serif;
         font-weight: 500;
     }
 
@@ -151,7 +143,7 @@ h2.line {
     span {
         font-family: 'Aoboshi One', serif;
         font-size: 14px;
-        background: $color-light-blue;
+        background: #F0FFFF;
         padding: 0 10px;
     }
 }
@@ -159,5 +151,19 @@ h2.line {
 @media not all and (hover: none) {
     .game-list::-webkit-scrollbar-thumb {
         border-radius: 0;
+    }
+}
+
+@keyframes matchday {
+    0% {
+        background-color: #d66064;
+    }
+
+    50% {
+        background-color: #ff0000;
+    }
+
+    100% {
+        background-color: #d66064;
     }
 }
