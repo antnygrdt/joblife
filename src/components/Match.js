@@ -26,7 +26,7 @@ const Match = ({ match }) => {
     if (days > 6 || !isFinished) {
         dateFormat = date.format('dddd D MMMM YYYY').toUpperCase();
     } else if (days >= 1) {
-        dateFormat = `Il y a ${Math.floor(days)} jour${days > 1 ? 's' : ''}`;
+        dateFormat = `Il y a ${Math.floor(days)} jour${Math.floor(days) > 1 ? 's' : ''}`;
     } else if (hours >= 1) {
         dateFormat = `Il y a ${Math.floor(hours)} heures`;
     } else dateFormat = 'Il y a 1 heure';
