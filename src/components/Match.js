@@ -9,7 +9,7 @@ const Match = ({ match }) => {
         return null;
     }
 
-    let isFinished = match.status === "finished";
+    const isFinished = match.status === "finished";
 
     const date = moment.utc(match.scheduled_at).locale('fr');
     const now = moment();
@@ -56,7 +56,7 @@ const Match = ({ match }) => {
 
     return (
         <div className='match-card'>
-            <div className={"header" + (isToday && !isRunning ? " matchday" : "")}>
+            <div className={"header" + (isToday && !isRunning && !isFinished ? " matchday" : "")}>
                 <p>{dateFormat}</p>
                 {isRunning && <div className='running '>
                     <p title='En cours...'>🔴</p>

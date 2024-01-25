@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Player from './Player';
 
 const Team = ({ setRosterOpen, roster }) => {
     const [transition, setTransition] = useState(false);
@@ -40,26 +41,7 @@ const Team = ({ setRosterOpen, roster }) => {
                         {Object.values(roster.players)
                             .sort((a, b) => a.index - b.index)
                             .map((player) => (
-                                <li key={player.nickname}>
-                                    <div className='player'>
-                                        <img src={player.avatar} alt={player.nickname} className='icone' />
-                                        <div className='infos1'>
-                                            <p className='nickname'>{player.nickname}</p>
-                                            <p className='name'>{player.name}</p>
-                                            <p className='role'>{player.role}</p>
-                                        </div>
-                                        <div className='infos2'>
-                                            {player.twitch &&
-                                                <a href={'https://twitch.tv/' + player.twitch} target='_blank'>
-                                                    <img src="./assets/icones/1.png" alt="" />
-                                                </a>
-                                            }
-                                            <a href={'https://x.com/' + player.twitter} target='_blank'>
-                                                <img src="./assets/icones/x.png" alt="" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
+                                <Player key={player.nickname} player={player} />
                             ))
                         }
                     </div>

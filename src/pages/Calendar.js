@@ -7,6 +7,8 @@ const Calendar = () => {
     const [matchData, setMatchData] = useState([])
     const [teamData, setTeamData] = useState([])
 
+    const maxMatchs = 30;
+    const [isUnrolled, setIsUnrolled] = useState(false);
     const [fadeIn, setFadeIn] = useState(false);
 
     const [page, setPageState] = useState("coming")
@@ -54,6 +56,8 @@ const Calendar = () => {
         team2: teamData.find(team => team.id === match.team2)
     })).filter((match) => (match.status === "finished" && page === "finished") || (match.status !== "finished" && page === "coming"));
 
+    const matchList = isUnrolled ? matchs : matchs.reverse().slice(0, maxMatchs);
+
     return (
         <div>
             <div className={`fade-in${fadeIn ? ' active' : ''}`}>
@@ -71,8 +75,8 @@ const Calendar = () => {
                             <p className='no-match-found'>Aucun match n'a été trouvé</p> :
 
                             <div className="matchs">
-                                <ul className={'match-list'}>
-                                    {Object.values(matchs)
+                                <div className={'match-list'}>
+                                    {Object.values(matchList)
                                         .sort((a, b) => {
                                             const dateA = new Date(a.scheduled_at);
                                             const dateB = new Date(b.scheduled_at);
@@ -85,7 +89,10 @@ const Calendar = () => {
                                             </li>
                                         ))
                                     }
-                                </ul>
+                                    {!isUnrolled && page == "finished" &&
+                                        <button onClick={() => setIsUnrolled(true)}>Afficher tous les matchs</button>
+                                    }
+                                </div>
                             </div>
                         }
                     </div>
