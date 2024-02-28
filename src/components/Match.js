@@ -78,9 +78,7 @@ const Match = ({ match }) => {
                         <p className={'wl ' + (match.team2.id === winner.id ? "V" : "D")}>{match.team2.id === winner.id ? "WIN" : "LOSE"}</p>
                     }
                 </div>
-                <div className="arrow">
-                    <img src={"./assets/icones/" + (unrolled ? "arrow-down" : "arrow-right") + ".png"} alt="Icone chevron" />
-                </div>
+                <i className={unrolled ? 'arrow down' : 'arrow right'}></i>
             </div>
             {unrolled &&
                 <div className='footer'>

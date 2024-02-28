@@ -12,10 +12,14 @@ const Game = ({ match, game, index }) => {
 
     function getFormattedTime(timeInSeconds) {
         var sec = timeInSeconds % 60;
-        var min = Math.floor(timeInSeconds / 60);
-        var minute = min.toString().length <= 1 ? "0" + min : "" + min;
-        var second = sec.toString().length <= 1 ? "0" + sec : "" + sec;
-        return minute + "m" + second;
+        var min = Math.floor(timeInSeconds / 60) % 60;
+        var hour = Math.floor(timeInSeconds / 3600);
+
+        var hourStr = hour > 0 ? hour + "h" : "";
+        var minuteStr = min.toString().length <= 1 ? "0" + min : "" + min;
+        var secondStr = sec.toString().length <= 1 ? "0" + sec : "" + sec;
+
+        return hourStr + minuteStr + "m" + secondStr + "s";
     }
 
     return (

@@ -15,7 +15,7 @@
         letter-spacing: 0.8px;
 
         &.matchday {
-            animation: matchday 2s infinite;
+            animation: matchday 5s infinite;
             transform: translateZ(0);
         }
 
@@ -81,10 +81,9 @@
     }
 
     .arrow {
-        transform: scale(0.6);
-        right: -4px;
-        font-size: 24px;
-        font-weight: 100;
+        align-self: center;
+        padding: 5px;
+        right: 10px;
     }
 
     .wl {
@@ -174,8 +173,16 @@ h2.line {
         background-color: #d66064;
     }
 
+    20% {
+        background-color: #d66064;
+    }
+
     50% {
         background-color: #ec0101;
+    }
+
+    80% {
+        background-color: #d66064;
     }
 
     100% {

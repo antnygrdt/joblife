@@ -17,7 +17,7 @@ const Welcome = ({ setOpenWelcome }) => {
 
     return (
         <div className="welcomeBg" style={{ backgroundColor: `rgba(0, 0, 0, ${backgroundColor})` }} onClick={() => close()}>
-            <div className={"welcomeContainer" + (transition ? ' active' : '')} style={{ transform: `scale(${scale})` }} onClick={(e) => e.stopPropagation()}>
+            <div className={"container" + (transition ? ' active' : '')} style={{ transform: `scale(${scale})` }} onClick={(e) => e.stopPropagation()}>
                 <div className='header'>
                     <h1>Joblife - Bienvenue</h1>
                     <div className="closeBtn">
@@ -33,10 +33,8 @@ const Welcome = ({ setOpenWelcome }) => {
                             Notez que cette extension n'est pas officielle et qu'elle n'est pas affiliée à Joblife !
                             Si vous souhaitez faire parvenir des idées d'améliorations ou d'ajouts, ou que vous
                             rencontrez le moindre problème, vous pouvez me contacter sur Twitter/X !
-                            <br></br>
                         </p>
-
-                        <a href={"https://www.x.com/tsuyobnha"} style={{ textDecoration: "none", display: "inline-block" }} target='_blank'>
+                        <a href={"https://www.x.com/tsuyobnha"} style={{ textDecoration: "none" }} target='_blank'>
                             <p style={{ color: "#1da1f2" }}>@tsuyobnha</p>
                         </a>
                     </div>

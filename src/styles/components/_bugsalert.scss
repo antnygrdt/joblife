@@ -1,0 +1,119 @@
+.bugsAlertBg {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    left: 0;
+    color: white;
+    z-index: 3;
+}
+
+.bugsAlertContainer {
+    width: 440px;
+    border-radius: 12px;
+    background-color: #15202b;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    &.active {
+        transition: transform 0.3s ease;
+    }
+
+    .body {
+        padding: 20px 0px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .header {
+        border-radius: 12px 12px 0 0;
+        position: relative;
+        text-align: center;
+        background-color: #253d55;
+        padding: 8px 0px;
+
+        h1 {
+            padding: 4px 48px;
+            margin: 0 auto;
+
+            font-family: 'Aoboshi One', serif;
+            font-size: 16px;
+            max-width: 230px;
+        }
+    }
+
+    .closeBtn {
+        position: absolute;
+        right: 14px;
+        top: 17px;
+
+        img {
+            width: 20px;
+
+            &:hover {
+                transform: scale(1.2);
+                cursor: pointer;
+            }
+        }
+    }
+
+    form {
+        background-color: #2f2f2f;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        margin: auto;
+        color: #f5f5f5;
+
+        label {
+            display: block;
+            text-align: left;
+
+            span.required {
+                color: red;
+            }
+        }
+
+    }
+
+    input[type="text"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0px 0px 0px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        background-color: #3c3c3c;
+        color: #f5f5f5;
+    }
+
+    textarea {
+        height: 80px;
+        resize: none;
+    }
+
+    button,
+    input[type="submit"] {
+        background-color: #6c757d; // Couleur de fond grise
+        color: white; // Texte blanc
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #5a6268; // Couleur de fond plus foncée lorsque la souris survole le bouton
+    }
+}

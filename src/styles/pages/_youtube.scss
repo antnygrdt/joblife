@@ -20,7 +20,7 @@
         transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
         transition-duration: 400ms;
         transition-property: color;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     button:focus,
@@ -50,6 +50,7 @@
 }
 
 .video-row {
+    padding: 10px 0px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

@@ -17,12 +17,12 @@ const Video = ({ video }) => {
     const title = truncateText(video.title, 50);
 
     return (
-        <div className='video'>
-            <a href={"https://youtu.be/" + video.id} target='_blank'>
-                <img src={video.thumbnail} alt={"Miniature Joblife Esport"} loading="lazy" />
-                <p className="title">{title}</p>
-            </a>
-        </div>
+        <a href={"https://youtu.be/" + video.id} target='_blank'>
+            <div className='video'>
+                <img src={video.thumbnail} alt={"Thumbnail"} loading="lazy" />
+                <p>{title}</p>
+            </div>
+        </a>
     );
 };
 
