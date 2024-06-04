@@ -1,21 +1,18 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Joblife",
   "version": "1.0.9",
   "description": "Suivez l'actualité des matchs, des nouvelles vidéos, des streams des joueurs et des annonces de l'équipe Joblife.",
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "tsuyodevcontact@gmail.com"
-    }
-  },
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html",
     "default_title": "Joblife"
   },
   "permissions": [
     "storage",
     "notifications",
-    "alarms",
+    "alarms"
+  ],
+  "host_permissions": [
     "*://*.asakicorp.com/*",
     "*://*.youtube.com/*"
   ],
@@ -27,8 +24,6 @@
     "256": "assets/logo/icon-256.png"
   },
   "background": {
-    "scripts": [
-      "service-worker.js"
-    ]
+    "service_worker": "service-worker.js"
   }
 }

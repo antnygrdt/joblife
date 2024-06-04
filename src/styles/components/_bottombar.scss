@@ -1,67 +1,35 @@
-$bg-color: #1b2c62;
-$border-color: #ffffff;
-$img-scale: 0.8;
-
 .bottom-bar {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: $bg-color;
-    padding-bottom: 4px;
-    padding-top: 10px;
+    background-color: #1b2c62;
+    padding-bottom: 6px;
+    padding-top: 12px;
 
     display: flex;
     justify-content: center;
-    gap: 8px;
 
-    border-top: 2px solid $border-color;
+    border-top: 2px solid white;
 
     img {
-        transform: scale($img-scale);
+        height: 23px;
+        transition: transform 0.1s ease-in-out;
     }
 
-    .twitter img {
-        width: 35px;
+    .left a {
+        margin: 0 5px;
     }
 
-    .youtube img {
-        width: 42px;
+    .left a:hover img {
+        transform: scale(1.25);
     }
 
-    .instagram img {
-        width: 28px;
-    }
-
-    .tiktok img {
-        width: 25px;
-    }
-
-    .website img {
-        width: 230px;
+    .right a:hover img {
+        transform: scale(1.1);
     }
 
     .spacer {
-        margin: 0px 5px;
+        margin: 0px 15px;
     }
-
-    .spacer-up {
-        margin: 50px 0px;
-    }
-}
-
-.image-container img {
-    transition: transform 0.1s ease-in-out;
-}
-
-.image-container:hover img {
-    transform: scale(1.1);
-}
-
-.website img {
-    transition: transform 0.2s ease-in-out;
-}
-
-.website:hover img {
-    transform: scale(0.9);
 }

@@ -4,29 +4,35 @@
     padding: 15px 0px;
     position: relative;
     text-align: center;
-}
 
-.upper-bar .logo {
-    display: inline-block;
+    .logo {
+        display: inline-block;
 
-    img {
-        width: 40px;
-    }
-}
-
-.upper-bar .settings {
-    position: absolute;
-    right: 10px;
-    top: 15px;
-
-    transition: transform 0.1s ease-in-out;
-
-    img {
-        width: 35px;
+        img {
+            width: 40px;
+        }
     }
 
-    &:hover {
-        transform: scale(1.2);
-        cursor: pointer;
+    .right {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        right: 10px;
+        top: 15px;
+
+        img {
+            height: 28px;
+            transition: transform 0.1s ease-in-out;
+
+            &:hover {
+                transform: scale(1.2);
+                cursor: pointer;
+            }
+
+            &.settings {
+                margin-left: 5px;
+                height: 35px;
+            }
+        }
     }
 }

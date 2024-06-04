@@ -31,19 +31,22 @@ const Youtube = () => {
     return (
         <div >
             <div className={`fade-in${fadeIn ? ' active' : ''}`}>
-                <div className='videos'>
+                <div className='videos-page'>
                     <h1>DERNIÈRES VIDÉOS</h1>
-                    <div className='video-row'>
-                        {videoList
-                            .map((video) => (
-                                <li key={video.id}>
-                                    <Video video={video} className="v" />
-                                </li>
-                            ))
-                        }
-                        {!isUnrolled &&
-                            <button onClick={() => setIsUnrolled(true)}>Afficher toutes les vidéos</button>
-                        }
+                    <div className='videos'>
+                        <div className='video-row scroll-bar'>
+                            {videoList
+                                .map((video) => (
+                                    <li key={video.id}>
+                                        <Video video={video} className="v" />
+                                    </li>
+                                ))
+                            }
+
+                            {!isUnrolled &&
+                                <button style={{ marginBottom: '2px' }} className="show-more-button" onClick={() => setIsUnrolled(true)}>Afficher toutes les vidéos</button>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

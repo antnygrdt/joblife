@@ -31,7 +31,7 @@ const Twitch = () => {
         <div>
             <div className={`fade-in${fadeIn ? ' active' : ''}`}>
                 <div className='twitch-page'>
-                    <div className='streamer-list'>
+                    <div className='streamer-list scroll-bar'>
                         {online.length > 0 && (
                             <h1>{"En ligne (" + online.length + ")"}</h1>
                         )}

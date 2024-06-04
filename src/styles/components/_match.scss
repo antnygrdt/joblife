@@ -33,138 +33,172 @@
         }
     }
 
+    .match {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        padding: 4px 0px;
+        background-color: #F0FFFF;
+        border-radius: 0 0 10px 10px;
+        color: black;
+        font-family: 'Josefin Sans', sans-serif;
+        font-weight: 600;
+        height: 30px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &.unrolled {
+            border-radius: 0px;
+        }
+
+        &:not(.unrolled) {
+            transition: border-radius 0.2s ease-in-out;
+            transition-delay: 0.1s;
+        }
+
+        .league,
+        .team,
+        .arrow {
+            display: flex;
+            position: absolute;
+            align-items: center;
+
+            transition: transform 0.1s ease-in-out,
+                -webkit-transform 0.1s ease-in-out;
+        }
+
+        .league {
+            left: 0;
+        }
+
+        .team {
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+
+            button {
+                border: none;
+                background: none;
+                padding: 0;
+
+                img {
+                    margin: 0;
+                    transition: transform 0.1s ease-in-out;
+                }
+
+                &:hover {
+                    cursor: pointer;
+
+                    img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+
+        .arrow {
+            align-self: center;
+            padding: 5px;
+            right: 10px;
+        }
+
+        .wl {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            width: 50px;
+
+            &.V {
+                color: green;
+            }
+
+            &.D {
+                color: #d66064;
+            }
+        }
+
+        img {
+            width: 28px;
+            height: 28px;
+            object-fit: scale-down;
+            margin: 0 6px;
+        }
+
+        .teams-hint {
+            width: max-content;
+        }
+
+        .schedule {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 15px;
+            margin: 0;
+        }
+    }
+
     .footer {
         align-items: center;
         border-radius: 0 0 10px 10px;
         background-color: #F0FFFF;
         color: black;
-    }
-}
 
-.match {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0px;
-    background-color: #F0FFFF;
-    border-radius: 0 0 10px 10px;
-    color: black;
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 600;
-    height: 30px;
+        transition: max-height 0.2s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
 
-    &:hover {
-        cursor: pointer;
-    }
-
-    &.unrolled {
-        border-radius: 0px;
-    }
-
-    .league,
-    .team,
-    .arrow {
-        display: flex;
-        position: absolute;
-        align-items: center;
-    }
-
-    .league {
-        left: 0;
-    }
-
-    .team {
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: 'Roboto', sans-serif;
-        font-weight: 700;
-    }
-
-    .arrow {
-        align-self: center;
-        padding: 5px;
-        right: 10px;
-    }
-
-    .wl {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 500;
-        width: 50px;
-
-        &.V {
-            color: green;
+        &.unrolled {
+            max-height: 300px;
         }
 
-        &.D {
-            color: #d66064;
+        h2.line {
+            border-bottom: 3px solid #000;
+            line-height: 0em;
+            margin-right: 28px;
+            margin-left: 20px;
+
+            span {
+                font-family: 'Aoboshi One', serif;
+                font-size: 14px;
+                background: #F0FFFF;
+                padding: 0 10px;
+            }
         }
-    }
 
-    img {
-        width: 28px;
-        height: 28px;
-        object-fit: scale-down;
-        margin: 0 6px;
-    }
+        .game-list {
+            margin: 0;
+            padding: 0px 20px;
+            padding-bottom: 14px;
+            max-height: 160px;
+            list-style-type: none;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #888888 #f1f1f1;
+        }
 
-    .teams-hint {
-        width: max-content;
-    }
+        button.show-details {
+            display: inline-block;
+            outline: none;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 5px;
+            padding: 10px 16px;
+            margin: 10px 0px;
+            border: 0;
+            color: #fff;
+            background: #d66064;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
 
-    .schedule {
-        font-family: 'Roboto', sans-serif;
-        font-weight: 500;
-    }
-
-    p {
-        font-size: 15px;
-        margin: 0;
-    }
-}
-
-.game-list {
-    margin: 0;
-    padding: 0px 20px;
-    padding-bottom: 14px;
-    max-height: 180px;
-    list-style-type: none;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #888888 #f1f1f1;
-
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    &.active::-webkit-scrollbar {
-        opacity: 0%;
-    }
-
-    &::-webkit-scrollbar-track {
-        background-color: #f1f1f1;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: #888888;
-        border-radius: 4px;
-    }
-}
-
-h2.line {
-    border-bottom: 2px solid #000;
-    line-height: 0em;
-
-    span {
-        font-family: 'Aoboshi One', serif;
-        font-size: 14px;
-        background: #F0FFFF;
-        padding: 0 10px;
-    }
-}
-
-@media not all and (hover: none) {
-    .game-list::-webkit-scrollbar-thumb {
-        border-radius: 0;
+            &:hover {
+                transition: all .1s ease;
+                box-shadow: 0 0 0 0 #fff, 0 0 0 3px black;
+            }
+        }
     }
 }
 

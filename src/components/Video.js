@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const Video = ({ video }) => {
+
+    const [isLoaded, setLoaded] = useState(false);
 
     const truncateText = (text, maxLength) => {
         if (text.length > maxLength) {
@@ -19,8 +22,14 @@ const Video = ({ video }) => {
     return (
         <a href={"https://youtu.be/" + video.id} target='_blank'>
             <div className='video'>
-                <img src={video.thumbnail} alt={"Thumbnail"} loading="lazy" />
-                <p>{title}</p>
+                <LazyLoadImage
+                    src={video.thumbnail}
+                    loading='lazy'
+                    effect='blur'
+                    height='100px'
+                    onLoad={() => setLoaded(true)}
+                />
+                {isLoaded && <p>{title}</p>}
             </div>
         </a>
     );

@@ -1,21 +1,14 @@
-$main-font: 'Poppins', sans-serif;
-$main-bg-color: rgb(15, 22, 27);
-$main-border-color: rgba(255, 255, 255, 0.466);
-
 .roster-card {
-    text-decoration: none;
-}
-
-.roster {
-    margin: 10px 25px 0px 25px;
+    min-height: 60px;
+    margin: 10px 25px 5px 25px;
     display: flex;
     align-items: center;
-    background-color: $main-bg-color;
-    border: 1px solid $main-border-color;
+    background-color: rgb(15, 22, 27);
+    border: 1px solid rgba(255, 255, 255, 0.466);
     border-radius: 16px;
     padding: 10px 16px;
     color: white;
-    font-family: $main-font;
+    font-family: 'Poppins', sans-serif;
     transition: transform 0.1s ease-in-out;
 
     &:hover {
@@ -25,8 +18,7 @@ $main-border-color: rgba(255, 255, 255, 0.466);
 
     .icone {
         width: 60px;
-        height: 60px;
-        object-fit: scale-down;
+        align-self: center;
     }
 
     .infos {

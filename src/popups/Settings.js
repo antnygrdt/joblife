@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import BugsAlert from './BugsAlert';
+import Popup from '../components/Popup';
+import '../styles/popups/Settings.scss';
 
 const Settings = ({ setOpenSettings }) => {
 
     const [settings, setSettings] = useState({});
-
-    const [transition, setTransition] = useState(false);
-    const [backgroundColor, setBackgroundColor] = useState(0.750);
-    const [scale, setScale] = useState(0);
-
     const [bugsAlertOpen, setBugsAlertOpen] = useState(false);
-
     const [coffeeOpen, setCoffeeOpen] = useState(false);
 
     useEffect(() => {
@@ -20,26 +16,7 @@ const Settings = ({ setOpenSettings }) => {
                 setSettings(jp);
             }
         });
-
-        show();
     }, []);
-
-    const show = () => {
-        setTransition(true);
-        setScale(1);
-        setTimeout(() => {
-            setTransition(false);
-        }, 300);
-    };
-
-    const close = () => {
-        setTransition(true);
-        setBackgroundColor(0);
-        setScale(0);
-        setTimeout(() => {
-            setOpenSettings(false);
-        }, 300);
-    }
 
     function checkBox(name, data) {
         const checked = settings[data] === undefined ? true : settings[data];
@@ -79,16 +56,12 @@ const Settings = ({ setOpenSettings }) => {
 
     return (
         <div>
-            {bugsAlertOpen && <BugsAlert setBugsAlertOpen={setBugsAlertOpen} />}
-            <div className="settingsBg" style={{ backgroundColor: `rgba(0, 0, 0, ${backgroundColor})` }} onClick={() => close()}>
-                <div className={"settingsContainer" + (transition ? ' active' : '')} style={{ transform: `scale(${scale})` }} onClick={(e) => e.stopPropagation()}>
-                    <div className='header'>
-                        <h1>Paramètres</h1>
-                        <div className="closeBtn">
-                            <img onClick={() => close()} src="./assets/icones/cross.png" alt="Croix" />
-                        </div>
-                    </div>
-                    <div className='body'>
+            <Popup
+                header="Paramètres"
+                setOpen={setOpenSettings}
+                containerStyle={{ paddingBottom: '15px', width: '400px' }}
+                body={
+                    <div style={{ textAlign: 'start', padding: '0' }} className='settings'>
                         {Object.keys(settings).length === 0 ?
 
                             <div>
@@ -130,7 +103,7 @@ const Settings = ({ setOpenSettings }) => {
                                         <p>Je travaille seul sur l'extension, si vous aimez mon travail et que vous souhaitez me soutenir,
                                             vous pouvez me payer un café ☕️
                                         </p>
-                                        <a href="https://www.buymeacoffee.com/tsuyo" target='_blank'>
+                                        <a href="https://ko-fi.com/tsuyobnha" target='_blank'>
                                             <button>☕️ Me soutenir</button>
                                         </a>
                                     </div>
@@ -138,10 +111,11 @@ const Settings = ({ setOpenSettings }) => {
                             </div>
                         }
                     </div>
-                </div>
-            </div>
+                }
+            />
+            {bugsAlertOpen && <BugsAlert setBugsAlertOpen={setBugsAlertOpen} />}
         </div>
-    );
+    )
 };
 
 export default Settings;

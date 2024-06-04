@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
-const UpperBar = ({ setSettingsOpen, setEasterEggOpen }) => {
+const UpperBar = ({ setSettingsOpen, setNotesOpen, setEasterEggOpen }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const [easter, setEaster] = useState(0);
@@ -33,8 +33,9 @@ const UpperBar = ({ setSettingsOpen, setEasterEggOpen }) => {
                 <div className='logo'>
                     <img src="./assets/Joblife-Logo.png" alt="Logo Joblife" onClick={() => easterEgg()} />
                 </div>
-                <div className='settings' onClick={() => setSettingsOpen(true)}>
-                    <img src="./assets/icones/settings.png" alt="Gear icon" />
+                <div className='right' >
+                    <img src="./assets/icones/notes.png" alt="Notes" title='Notes' onClick={() => setNotesOpen(true)} />
+                    <img className='settings' src="./assets/icones/settings.png" alt="Settings" title='Paramètres' onClick={() => setSettingsOpen(true)} />
                 </div>
             </div>
             <div className="navigation">

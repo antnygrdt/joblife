@@ -1,89 +1,21 @@
-.videos {
+.videos-page {
     color: white;
     text-align: center;
 
     h1 {
         font-family: 'Aoboshi One', serif;
         font-size: 24px;
+        margin: 10px 0px;
     }
 
-    button {
-        font-size: 18px;
-        color: #e1e1e1;
-        font-family: "Segoe UI", Tahoma, sans-serif;
-        font-weight: 800;
-        cursor: pointer;
-        position: relative;
-        border: none;
-        background: none;
-        text-transform: uppercase;
-        transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-        transition-duration: 400ms;
-        transition-property: color;
-        margin-bottom: 30px;
-    }
+    .video-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
-    button:focus,
-    button:hover {
-        color: #fff;
-    }
-
-    button:focus:after,
-    button:hover:after {
-        width: 100%;
-        left: 0%;
-    }
-
-    button:after {
-        content: "";
-        pointer-events: none;
-        bottom: -2px;
-        left: 50%;
-        position: absolute;
-        width: 0%;
-        height: 2px;
-        background-color: #fff;
-        transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
-        transition-duration: 400ms;
-        transition-property: width, left;
-    }
-}
-
-.video-row {
-    padding: 10px 0px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    list-style-type: none;
-    max-height: 350px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #888888 #f1f1f1;
-}
-
-.video-row::-webkit-scrollbar {
-    width: 6px;
-}
-
-.video-row::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-}
-
-.video-row::-webkit-scrollbar-thumb {
-    background-color: #888888;
-    border-radius: 4px;
-}
-
-.video-row::-webkit-scrollbar-thumb:hover {
-    background-color: #888888;
-}
-
-.video-row::-webkit-scrollbar-thumb:active {
-    background-color: #888888;
-}
-
-@media not all and (hover: none) {
-    .video-row::-webkit-scrollbar-thumb {
-        border-radius: 0;
+        list-style-type: none;
+        max-height: 345px;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 }

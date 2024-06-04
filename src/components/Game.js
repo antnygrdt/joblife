@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Game = ({ match, game, index }) => {
+const Game = ({ match, game, index, spoil: defaultSpoil }) => {
+
+    const [spoil, setSpoil] = useState(defaultSpoil);
+
+    useEffect(() => {
+        setSpoil(defaultSpoil);
+    }, [defaultSpoil]);
 
     const winnerId = game.winner_id;
     const key = game.status === "running" ? "En cours" : game.status === "finished" ? "Gagnant" : "À venir";
@@ -30,7 +36,15 @@ const Game = ({ match, game, index }) => {
             </div>
             <div className='game' style={{ 'borderRadius': `0px 0px ${gameRadius}px ${gameRadius}px` }}>
                 <p>{key}</p>
-                <p>{value.toUpperCase()}</p>
+                {(winnerId !== null && !spoil) ?
+                    <button onClick={(e) => {
+                        e.stopPropagation();
+                        setSpoil(true);
+                    }}>
+                        <img style={{ width: '24px', alignSelf: 'center' }} src="assets/icones/eye2.png" alt="Spoils cachés" title='Afficher' />
+                    </button> :
+                    <p>{value.toUpperCase()}</p>
+                }
             </div>
         </div>
     );

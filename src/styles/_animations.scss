@@ -1,0 +1,41 @@
+.fade-in {
+    animation: fade-in 0.2s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 100;
+    }
+}
+
+/* Easter Egg */
+
+@keyframes easterEgg_Text {
+
+    0%,
+    100% {
+        color: white;
+    }
+
+    50% {
+        color: black;
+    }
+
+    100% {
+        color: white;
+    }
+}
+
+@keyframes easterEgg_Background {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
