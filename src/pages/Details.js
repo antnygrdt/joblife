@@ -11,8 +11,8 @@ const Details = () => {
   const match = state.match;
 
   const [currentGame, setCurrentGame] = useState(0);
-  const [currentPlayer, setCurrentPlayer] = useState(0);
   const [category, setCategory] = useState('overview');
+  const [hoverGraph, setHoverGraph] = useState(false);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [noData, setNoData] = useState(false);
@@ -51,7 +51,7 @@ const Details = () => {
           isUnrolled: state.isUnrolled
         }
       })}>
-        Retourner au calendrier
+        ← Retourner au calendrier
       </button>
     );
   }
@@ -92,13 +92,13 @@ const Details = () => {
       for (let i = 0; i < 6; i++) {
         if (i < items.length) {
           const item = items[i];
-          elements.push(<img key={i} className='item' src={item.icon} alt={item.name} title={`${item.name}`} />);
+          elements.push(<img key={i} className='item' src={item.icon} alt={item.name} title={`${item.name}`} loading='lazy' />);
         } else {
           elements.push(<div className="item blank" key={i}></div>);
         }
       }
 
-      elements.push(<img key={6} className='item' src={trinket.icon} alt={trinket.name} title={`${trinket.name}`} />);
+      elements.push(<img key={6} className='item' src={trinket.icon} alt={trinket.name} title={`${trinket.name}`} loading='lazy' />);
 
       return elements;
     }
@@ -122,127 +122,173 @@ const Details = () => {
             <i className='arrow left'></i>
           </button>
           <p>{`Game N°${currentGame + 1}`}</p>
-          <button disabled={currentGame === games.length - 1} onClick={() => {
-            console.log(currentGame);
-            console.log(games.length);
-            console.log(clamp(currentGame + 1, 0, games.length - 1));
-            setCurrentGame(clamp(currentGame + 1, 0, games.length - 1));
-          }}>
+          <button disabled={currentGame === games.length - 1} onClick={() => setCurrentGame(clamp(currentGame + 1, 0, games.length - 1))}>
             <i style={{ marginRight: '3px' }} className='arrow right'></i>
           </button>
         </div>
       );
     }
 
+    const Categories = () => {
+      return (
+        <div className='categories'>
+          <button title='Aperçu' disabled={category === 'overview'} onClick={() => { setCategory('overview') }}>
+            <img src={'assets/icones/eye.png'} alt="Aperçu" />
+          </button>
+          <button title='Graphique' disabled={category === 'graph'} onClick={() => { setCategory('graph') }}>
+            <img src={'assets/icones/graph.png'} alt="Graphique" />
+          </button>
+        </div>
+      )
+    }
+
+    let maxDamage = Math.max(...players.map(p => p.damage));
+
+    const PlayerGraph = ({ p, blue }) => {
+      const percentage = p.damage / maxDamage * 100;
+      return (
+        <div className='player'>
+          <img style={{ border: `2px solid ${p.name === name ? '#fabe0a' : blue ? '#0a96aa' : '#b71d36'}` }} src={p.champion.icon} alt={p.champion.name} title={p.name} />
+          <div className='graph' >
+            <div className='bar' style={{ width: `${percentage / 100 * 600}px`, backgroundColor: blue ? '#1ba9bd' : '#ec2040' }}
+              onMouseEnter={() => setHoverGraph(true)} onMouseLeave={() => setHoverGraph(false)}>
+            </div>
+
+            {hoverGraph && (
+              <div className='damage-container'>
+                <p className='damage'>{p.damage}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
     return <div className='match-details'>
-      <ReturnButton />
-      <GameSelector />
+      <div className='upper'>
+        <ReturnButton />
+        {games.length > 1 && <GameSelector />}
+        <Categories />
+      </div>
 
       {match.game === 'League of Legends' ?
-
-
-
         <div className='lol'>
-          {teams.map((team, index) => (
-            <div key={index} className='team'>
-              <div className='left'>
-                <div className='placeholder'>
-                  <p className={`item-1 ${team.side}`}>{`Équipe ${index + 1}`}</p>
-                  <div className='item-2'>
-                    <p className={`${team.side}`}>{`${team.kills} / ${team.deaths} / ${team.assists}`}</p>
-                    <KdaSVG className={`${team.side}`} />
-                  </div>
-                  <div className='item-3'>
-                    <p>{`${team.gold}`}</p>
-                    <GoldSVG />
-                  </div>
-                  <div className='statistic'>
-                    <KdaSVG />
-                  </div>
-                  <div className='statistic'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                      <path className="cls-1" d="M56.61,1.56H43.39L8.17,50.92V63.21L43.39,98.44H56.61L91.83,63.21V50.92ZM54.4,80.83H45.6L28,56.61l.14-13.22h8.67L43.25,50h13.5l6.46-6.61h8.67L72,56.61Z" />
-                    </svg>
-                  </div>
-                  <div className='statistic'>
-                    <GoldSVG />
-                  </div>
-                </div>
-                <div className='players'>
-                  {team.players.map((player, index) => (
-                    <div key={index} className='player'>
-                      <div className='item-1'>
-                        <img className='keystone' src={player.keystonerune.icon} alt={player.keystonerune.name} />
-                        <div className='summoners'>
-                          {player.summoners.map((summoner, index) => (
-                            <img key={index} src={summoner.icon} alt={summoner.name} />
-                          ))}
-                        </div>
-                      </div>
+          {category === 'overview' ?
+            <div className='overview'>
+              {teams.map((team, index) => (
+                <div key={index} className='team'>
+                  <div className='left'>
+                    <div className='placeholder'>
+                      <p className={`item-1 ${team.side}`}>{`Équipe ${index + 1}`}</p>
                       <div className='item-2'>
-                        <img className='champion' src={player.champion.icon} alt={player.champion.name} title={player.champion.name} />
-                        <p className='name'>{player.name}</p>
+                        <p className={`${team.side}`}>{`${team.kills} / ${team.deaths} / ${team.assists}`}</p>
+                        <KdaSVG className={`${team.side}`} />
                       </div>
                       <div className='item-3'>
-                        {Items(player.items, player.trinket)}
+                        <p>{`${team.gold}`}</p>
+                        <GoldSVG />
                       </div>
-                      <p className='statistic'>{`${player.kills}/${player.deaths}/${player.assists}`}</p>
-                      <p className='statistic'>{player.vision}</p>
-                      <p className='statistic'>{player.gold}</p>
+                      <div className='statistic'>
+                        <KdaSVG />
+                      </div>
+                      <div className='statistic'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                          <path className="cls-1" d="M56.61,1.56H43.39L8.17,50.92V63.21L43.39,98.44H56.61L91.83,63.21V50.92ZM54.4,80.83H45.6L28,56.61l.14-13.22h8.67L43.25,50h13.5l6.46-6.61h8.67L72,56.61Z" />
+                        </svg>
+                      </div>
+                      <div className='statistic'>
+                        <GoldSVG />
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
+                    <div className='players'>
+                      {team.players.map((player, index) => (
+                        <div key={index} className='player'>
+                          <div className='item-1'>
+                            <img className='keystone' src={player.keystonerune.icon} alt={player.keystonerune.name} loading='lazy' />
+                            <div className='summoners'>
+                              {player.summoners.map((summoner, index) => (
+                                <img key={index} src={summoner.icon} alt={summoner.name} loading='lazy' />
+                              ))}
+                            </div>
+                          </div>
+                          <div className='item-2'>
+                            <img className='champion' src={player.champion.icon} alt={player.champion.name} title={player.champion.name} loading='lazy' />
+                            <p className='name'>{player.name}</p>
+                          </div>
+                          <div className='item-3'>
+                            {Items(player.items, player.trinket)}
+                          </div>
+                          <p className='statistic'>{`${player.kills}/${player.deaths}/${player.assists}`}</p>
+                          <p className='statistic'>{player.vision}</p>
+                          <p className='statistic'>{player.gold}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-              <span className='middle'></span>
+                  <span className='middle'></span>
 
-              <div className='right'>
-                <p className='title'>Banissements & objectifs</p>
-                <div className='bans'>
-                  {team.bans.map((ban, index) => (
-                    <img key={index} className='ban' src={ban.icon} alt={ban.name} title={ban.name} />
-                  ))}
+                  <div className='right'>
+                    <p className='title'>Banissements & objectifs</p>
+                    <div className='bans'>
+                      {team.bans.map((ban, index) => (
+                        <img key={index} className='ban' src={ban.icon} alt={ban.name} title={ban.name} loading='lazy' />
+                      ))}
+                    </div>
+                    <div className='objectives'>
+                      <div className='item'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                          <polygon className="cls-1" points="53.63 70.18 49.86 70.18 46.08 70.18 23.43 49.41 38.53 98.5 49.86 98.5 61.19 98.5 76.29 49.41 53.63 70.18" />
+                          <path className="cls-1" d="M70.59,30.53l0-9.43L55.52,2.22H44.19L29.09,21.1l0,9.43H21.54v7.56L45.66,60.86h8.4L78.18,38.09V30.53Zm-15.07.7v6.16a.7.7,0,0,1-.7.7H44.89a.71.71,0,0,1-.7-.7V31.23a.7.7,0,0,0-.7-.7H39.24a.69.69,0,0,1-.7-.7l.08-8a.69.69,0,0,1,.7-.69h4.17a.7.7,0,0,0,.7-.71V14.25a.7.7,0,0,1,.71-.7l5,0,5,0a.7.7,0,0,1,.7.7v6.14a.71.71,0,0,0,.7.71H60.4a.69.69,0,0,1,.7.69l.08,8a.7.7,0,0,1-.7.7H56.22A.71.71,0,0,0,55.52,31.23Z" />
+                        </svg>
+                        <p>{team.towers ?? '?'}</p>
+                      </div>
+                      <div className='item'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" title='Inhibiteurs'>
+                          <path className="cls-1" d="M55.41,31.06a2.89,2.89,0,0,0-2-.84H47.72a2.92,2.92,0,0,0-2,.84L31,45.72a2.91,2.91,0,0,0-.85,2.05v5.65a2.91,2.91,0,0,0,1,2.19L45.64,68.33a2.89,2.89,0,0,0,1.91.71h6a2.91,2.91,0,0,0,1.91-.71L70,55.61a2.91,2.91,0,0,0,1-2.19V47.77a2.91,2.91,0,0,0-.85-2.05Z" />
+                          <path className="cls-1" d="M49.52,3.65a46,46,0,1,0,46,46A46,46,0,0,0,49.52,3.65Zm0,81.74A35.76,35.76,0,1,1,85.28,49.63,35.76,35.76,0,0,1,49.52,85.39Z" />
+                        </svg>
+                        <p>{team.inhibitors ?? '?'}</p>
+                      </div>
+                      <div className='item'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                          <path className="cls-1" d="M61.33,1H55.66V8.56L73.6,27.44l-.95,5.66-1.88,3.78H57.55L55.66,35V27.44H44.34V35l-1.89,1.89H29.23L27.35,33.1l-1-5.66L44.34,8.56V1H38.67L2.8,20.8V36.88L31.67,99h8.89V87.85H59.44V99h8.89L97.2,36.88V20.8Zm-20,66.07H32.25A1.13,1.13,0,0,1,31.12,66V56.88a1.14,1.14,0,0,1,1.13-1.13h9.07a1.14,1.14,0,0,1,1.13,1.13V66A1.13,1.13,0,0,1,41.32,67.08ZM54.54,78.41H45.46a1.13,1.13,0,0,1-1.12-1.13V70.1A1.12,1.12,0,0,1,45.46,69h9.08a1.12,1.12,0,0,1,1.12,1.13v7.18A1.13,1.13,0,0,1,54.54,78.41Zm0-24.54H45.46a1.13,1.13,0,0,1-1.12-1.13V45.55a1.12,1.12,0,0,1,1.12-1.12h9.08a1.12,1.12,0,0,1,1.12,1.12v7.19A1.13,1.13,0,0,1,54.54,53.87ZM67.75,67.08H58.68A1.13,1.13,0,0,1,57.55,66V56.88a1.14,1.14,0,0,1,1.13-1.13h9.07a1.14,1.14,0,0,1,1.13,1.13V66A1.13,1.13,0,0,1,67.75,67.08Z" />
+                        </svg>
+                        <p>{team.heralds ?? '?'}</p>
+                      </div>
+                      <div className='item'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                          <path className="cls-1" d="M99.06,29H81.44l.31-25.2H73.12L62.51,19.22,54.81,1.9H45.19l-7.7,17.32L26.88,3.82H18.25L18.56,29H.94v5.59h0L18.25,49.13v22h0l27,26.94h9.5l27-26.94h0v-22L99.06,34.61ZM45.19,64.86H37.51L27.87,50V40.38h2L45.19,53.85ZM74.05,51.92,64.41,66.79H56.73v-11L72.1,42.3h2Z" />
+                        </svg>
+                        <p>{team.dragons ?? '?'}</p>
+                      </div>
+                      <div className='item'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                          <polyline className="cls-1" points="19.37 82.84 19.37 92.28 11.82 92.28 0.49 79.06 0.49 73.7 6.16 73.7 6.16 68.04 13.53 68.04 19.37 82.84" />
+                          <polyline className="cls-1" points="79.78 82.84 79.78 92.28 87.33 92.28 98.66 79.06 98.66 73.7 93 73.7 93 68.04 85.63 68.04 79.78 82.84" />
+                          <polygon className="cls-1" points="49.58 46.97 45.91 46.97 42.03 52.63 42.03 61.74 45.8 65.85 49.58 65.85 53.35 65.85 57.13 61.74 57.13 52.63 53.25 46.97 49.58 46.97" />
+                          <path className="cls-1" d="M74.12,7.33H66.57V26.2h-34V7.33H25L6.16,33.39V58.3L33.81,86.62H65.35L93,58.3V33.39ZM66.57,62.07,57.13,73.4H42L32.59,62.07V48.86l9-9.41h16l9,9.41Z" />
+                        </svg>
+                        <p>{team.barons ?? '?'}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className='objectives'>
-                  <div className='item'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                      <polygon className="cls-1" points="53.63 70.18 49.86 70.18 46.08 70.18 23.43 49.41 38.53 98.5 49.86 98.5 61.19 98.5 76.29 49.41 53.63 70.18" />
-                      <path className="cls-1" d="M70.59,30.53l0-9.43L55.52,2.22H44.19L29.09,21.1l0,9.43H21.54v7.56L45.66,60.86h8.4L78.18,38.09V30.53Zm-15.07.7v6.16a.7.7,0,0,1-.7.7H44.89a.71.71,0,0,1-.7-.7V31.23a.7.7,0,0,0-.7-.7H39.24a.69.69,0,0,1-.7-.7l.08-8a.69.69,0,0,1,.7-.69h4.17a.7.7,0,0,0,.7-.71V14.25a.7.7,0,0,1,.71-.7l5,0,5,0a.7.7,0,0,1,.7.7v6.14a.71.71,0,0,0,.7.71H60.4a.69.69,0,0,1,.7.69l.08,8a.7.7,0,0,1-.7.7H56.22A.71.71,0,0,0,55.52,31.23Z" />
-                    </svg>
-                    <p>{team.towers ?? '?'}</p>
-                  </div>
-                  <div className='item'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" title='Inhibiteurs'>
-                      <path className="cls-1" d="M55.41,31.06a2.89,2.89,0,0,0-2-.84H47.72a2.92,2.92,0,0,0-2,.84L31,45.72a2.91,2.91,0,0,0-.85,2.05v5.65a2.91,2.91,0,0,0,1,2.19L45.64,68.33a2.89,2.89,0,0,0,1.91.71h6a2.91,2.91,0,0,0,1.91-.71L70,55.61a2.91,2.91,0,0,0,1-2.19V47.77a2.91,2.91,0,0,0-.85-2.05Z" />
-                      <path className="cls-1" d="M49.52,3.65a46,46,0,1,0,46,46A46,46,0,0,0,49.52,3.65Zm0,81.74A35.76,35.76,0,1,1,85.28,49.63,35.76,35.76,0,0,1,49.52,85.39Z" />
-                    </svg>
-                    <p>{team.inhibitors ?? '?'}</p>
-                  </div>
-                  <div className='item'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                      <path className="cls-1" d="M61.33,1H55.66V8.56L73.6,27.44l-.95,5.66-1.88,3.78H57.55L55.66,35V27.44H44.34V35l-1.89,1.89H29.23L27.35,33.1l-1-5.66L44.34,8.56V1H38.67L2.8,20.8V36.88L31.67,99h8.89V87.85H59.44V99h8.89L97.2,36.88V20.8Zm-20,66.07H32.25A1.13,1.13,0,0,1,31.12,66V56.88a1.14,1.14,0,0,1,1.13-1.13h9.07a1.14,1.14,0,0,1,1.13,1.13V66A1.13,1.13,0,0,1,41.32,67.08ZM54.54,78.41H45.46a1.13,1.13,0,0,1-1.12-1.13V70.1A1.12,1.12,0,0,1,45.46,69h9.08a1.12,1.12,0,0,1,1.12,1.13v7.18A1.13,1.13,0,0,1,54.54,78.41Zm0-24.54H45.46a1.13,1.13,0,0,1-1.12-1.13V45.55a1.12,1.12,0,0,1,1.12-1.12h9.08a1.12,1.12,0,0,1,1.12,1.12v7.19A1.13,1.13,0,0,1,54.54,53.87ZM67.75,67.08H58.68A1.13,1.13,0,0,1,57.55,66V56.88a1.14,1.14,0,0,1,1.13-1.13h9.07a1.14,1.14,0,0,1,1.13,1.13V66A1.13,1.13,0,0,1,67.75,67.08Z" />
-                    </svg>
-                    <p>{team.heralds ?? '?'}</p>
-                  </div>
-                  <div className='item'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                      <path className="cls-1" d="M99.06,29H81.44l.31-25.2H73.12L62.51,19.22,54.81,1.9H45.19l-7.7,17.32L26.88,3.82H18.25L18.56,29H.94v5.59h0L18.25,49.13v22h0l27,26.94h9.5l27-26.94h0v-22L99.06,34.61ZM45.19,64.86H37.51L27.87,50V40.38h2L45.19,53.85ZM74.05,51.92,64.41,66.79H56.73v-11L72.1,42.3h2Z" />
-                    </svg>
-                    <p>{team.dragons ?? '?'}</p>
-                  </div>
-                  <div className='item'>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                      <polyline className="cls-1" points="19.37 82.84 19.37 92.28 11.82 92.28 0.49 79.06 0.49 73.7 6.16 73.7 6.16 68.04 13.53 68.04 19.37 82.84" />
-                      <polyline className="cls-1" points="79.78 82.84 79.78 92.28 87.33 92.28 98.66 79.06 98.66 73.7 93 73.7 93 68.04 85.63 68.04 79.78 82.84" />
-                      <polygon className="cls-1" points="49.58 46.97 45.91 46.97 42.03 52.63 42.03 61.74 45.8 65.85 49.58 65.85 53.35 65.85 57.13 61.74 57.13 52.63 53.25 46.97 49.58 46.97" />
-                      <path className="cls-1" d="M74.12,7.33H66.57V26.2h-34V7.33H25L6.16,33.39V58.3L33.81,86.62H65.35L93,58.3V33.39ZM66.57,62.07,57.13,73.4H42L32.59,62.07V48.86l9-9.41h16l9,9.41Z" />
-                    </svg>
-                    <p>{team.barons ?? '?'}</p>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
-          ))}
+
+            :
+
+            <div className='graph'>
+              {teams.map((team, index) => (
+                <div key={index} className='team'>
+                  {team.players.map((player) => (
+                    <PlayerGraph key={player.name} p={player} blue={team.side === 'Blue'} />
+                  ))}
+                </div>
+              ))}
+            </div>
+          }
 
         </div> :
 
