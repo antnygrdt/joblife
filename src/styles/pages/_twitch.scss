@@ -1,20 +1,18 @@
 .twitch-page {
-    color: white;
+  color: white;
 }
 
 .streamer-list {
-    margin-top: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-    list-style-type: none;
-    height: 390px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #888888 #f1f1f1;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type: none;
+  height: 390px;
+  overflow-y: auto;
 
-    h1 {
-        margin-left: 25px;
-        font-family: 'Aoboshi One', serif;
-        font-size: 18px;
-    }
+  h1 {
+    margin-left: 25px;
+    font-family: 'Aoboshi One', serif;
+    font-size: 18px;
+  }
 }

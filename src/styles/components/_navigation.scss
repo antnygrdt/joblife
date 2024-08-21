@@ -1,11 +1,7 @@
-$nav-bg-color: #1b2c62;
-$hover-bg-color: rgba(20, 33, 77, 0.5);
-$selected-bg-color: rgba(20, 33, 77, 0.8);
-
 .navigation {
     border-bottom: 2px solid white;
     text-decoration: none;
-    background-color: $nav-bg-color;
+    background-color: #1b2c62;
     padding-top: 5px;
 
     ul {
@@ -21,15 +17,21 @@ $selected-bg-color: rgba(20, 33, 77, 0.8);
         position: relative;
         z-index: 1;
 
-        &.selected::before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: $selected-bg-color;
-            z-index: -1;
+        &.selected {
+            a {
+                cursor: default;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -10px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(20, 33, 77, 0.8);
+                z-index: -1;
+            }
         }
 
         &:not(.selected):hover::before {
@@ -39,7 +41,7 @@ $selected-bg-color: rgba(20, 33, 77, 0.8);
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: $hover-bg-color;
+            background-color: rgba(20, 33, 77, 0.5);
             z-index: -1;
         }
 

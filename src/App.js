@@ -14,13 +14,14 @@ import Update from './popups/Update';
 import { compareVersions } from './Utils';
 import NewNotification from './popups/NewNotification';
 import Notes from './popups/Notes';
+import Details from './pages/Details';
 
 const Calendar = lazy(() => import('./pages/Calendar'));
 const Twitch = lazy(() => import('./pages/Twitch'));
 const Youtube = lazy(() => import('./pages/Youtube'));
 
 function App() {
-  const [isOnline, setIsOnline] = useState(window.navigator.onLine);
+  const [isOnline, setIsOnline] = useState(null);
 
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
@@ -32,21 +33,29 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   const [currentNotifications, setCurrentNotifications] = useState([]);
 
+  function checkInternet() {
+    fetch('https://www.google.com', { method: 'HEAD', mode: 'no-cors' })
+      .then(() => {
+        setIsOnline(true);
+      })
+      .catch(() => {
+        setIsOnline(false);
+      });
+  }
+
   useEffect(() => {
-    const updateOnlineStatus = () => setIsOnline(window.navigator.onLine);
+    checkInternet();
 
-    window.addEventListener('offline', updateOnlineStatus);
-    window.addEventListener('online', updateOnlineStatus);
-
-    return () => {
-      window.removeEventListener('offline', updateOnlineStatus);
-      window.removeEventListener('online', updateOnlineStatus);
-    };
+    setInterval(() => {
+      checkInternet();
+    }, 5000 * 3);
   }, []);
 
   useEffect(() => {
+    if (isOnline === null) return;
+
     if (!isOnline) {
-      document.body.style.height = '300px';
+      document.body.style.height = '350px';
 
     } else {
       document.body.style.height = '750px';
@@ -86,12 +95,25 @@ function App() {
   window.addEventListener('offline', () => setIsOnline(false));
   window.addEventListener('online', () => setIsOnline(true));
 
-  if (!isOnline) {
+  if (isOnline === null) {
+    return null;
+  } else if (!isOnline) {
     return (
-      <div className='no-connection' style={{ height: '250px' }}>
-        <h1>Joblife</h1>
-        <h2>Tu ne sembles pas connecté à Internet</h2>
-        <h3>Cette extension nécessite une connexion à internet pour fonctionner.</h3>
+      <div className='no-connection' style={{ height: '350px' }}>
+        <div className='main'>
+          <div className='icons'>
+            <img src="assets/icones/no-connection.png" alt="Pas de connexion" />
+          </div>
+          <h1>OOPS!</h1>
+          <h2>Connexion internet lente ou inexistante</h2>
+          <h3>Une connexion internet est nécessaire pour utiliser l'extension</h3>
+
+          <button onClick={() => checkInternet()}>Réessayer</button>
+        </div>
+
+        <div className='footer'>
+          <p>Si vous n'arrivez pas à résoudre ce problème, contactez <a href="https://x.com/tsuyobnha" target='_blank'>@tsuyobnha</a> sur X.</p>
+        </div>
       </div>
     );
   } else return (
@@ -104,6 +126,7 @@ function App() {
             <Route path="/twitch" element={<Twitch />} />
             <Route path="/youtube" element={<Youtube />} />
             <Route path="/rosters" element={<Rosters />} />
+            <Route path="/details" element={<Details />} />
 
             <Route path="*" element={<Calendar />} />
           </Routes>
