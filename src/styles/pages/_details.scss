@@ -1,6 +1,8 @@
 .match-details {
-  max-height: 460px;
+  height: 465px;
   overflow: hidden;
+
+  position: relative;
 
   .loading {
     display: flex;
@@ -26,7 +28,7 @@
 
     position: relative;
     margin: 0 24px;
-    margin-top: 14px;
+    margin-top: 12px;
 
     .return {
       background: none;
@@ -100,6 +102,35 @@
 
         img {
           width: 20px;
+        }
+      }
+    }
+
+    .side-filter {
+      display: flex;
+
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 4px;
+
+        border: none;
+        width: 80px;
+        height: 26px;
+        border-radius: 4px;
+
+        color: black;
+
+        background-color: rgb(180, 180, 180);
+
+        &:disabled {
+          background-color: rgb(235, 235, 235);
+        }
+
+        &:hover:not(:disabled) {
+          cursor: pointer;
+          background-color: rgb(200, 200, 200);
         }
       }
     }
@@ -341,6 +372,171 @@
 
             font-size: 10px;
             font-family: 'Poppins', sans-serif;
+          }
+        }
+      }
+    }
+  }
+
+  .valorant {
+    color: white;
+    margin-top: 16px;
+
+    p {
+      margin: 0;
+    }
+
+    .overview {
+      display: flex;
+      justify-content: space-between;
+
+      margin: 0 24px;
+      margin-top: 8px;
+
+      .rounds-container {
+        display: flex;
+        max-height: 400px;
+        overflow-y: auto;
+
+        .rounds {
+          margin-right: 10px;
+
+          .teams {
+            display: flex;
+            margin-bottom: 8px;
+
+            span {
+              width: 16px;
+            }
+
+            .team {
+              width: 20px;
+              margin: 0 2px;
+              object-fit: scale-down;
+              align-self: center;
+            }
+          }
+
+          .round {
+            display: flex;
+            align-items: center;
+
+            .number {
+              width: 16px;
+              text-align: right;
+            }
+
+            .square {
+              width: 20px;
+              height: 20px;
+              border-radius: 4px;
+              margin: 2px;
+
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              background-color: #b9b9b9;
+
+              &.defense {
+                background-color: #24b298;
+              }
+
+              &.attack {
+                background-color: #e25d5a;
+              }
+
+              img {
+                width: 16px;
+              }
+            }
+          }
+        }
+      }
+
+      .stats {
+        .teams {
+          height: 400px;
+          overflow-y: auto;
+
+          .team {
+            margin-bottom: 18px;
+
+            .item-2,
+            .item-3,
+            .item-4,
+            .item-5,
+            .item-6,
+            .item-7,
+            .item-8,
+            .item-9,
+            .item-10,
+            .item-11 {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 30px;
+              margin: 2px;
+            }
+
+            .item-2,
+            .item-3,
+            .item-6,
+            .item-7,
+            .item-8 {
+              width: 40px;
+            }
+
+            .item-4 {
+              display: flex;
+              justify-content: space-evenly;
+              width: 100px;
+
+              * {
+                text-align: center;
+                width: 14px;
+              }
+            }
+
+            .placeholder {
+              display: flex;
+
+              .item-1 {
+                width: 120px;
+              }
+            }
+
+            .players {
+              display: flex;
+              flex-direction: column;
+
+              .player {
+                display: flex;
+
+                .bg {
+                  background-color: rgb(115, 115, 115);
+                }
+
+                .item-1 {
+                  display: flex;
+                  align-items: center;
+                  width: 120px;
+
+                  .name {
+                    font-weight: 600;
+                  }
+
+                  .acronym {
+                    color: rgb(220, 220, 220);
+                  }
+
+                  img {
+                    width: 28px;
+                    margin-right: 4px;
+                  }
+                }
+              }
+            }
           }
         }
       }

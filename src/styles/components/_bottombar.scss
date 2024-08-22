@@ -1,35 +1,35 @@
 .bottom-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #1b2c62;
-    padding-bottom: 6px;
-    padding-top: 12px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1b2c62;
+  padding-bottom: 6px;
+  padding-top: 12px;
 
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    border-top: 2px solid white;
+  border-top: 2px solid white;
 
-    img {
-        height: 23px;
-        transition: transform 0.1s ease-in-out;
-    }
+  img {
+    height: 23px;
+    transition: transform 0.1s ease-in-out;
+  }
 
-    .left a {
-        margin: 0 5px;
-    }
+  .left a {
+    margin: 0 5px;
+  }
 
-    .left a:hover img {
-        transform: scale(1.25);
-    }
+  .left a:hover img {
+    transform: scale(1.25);
+  }
 
-    .right a:hover img {
-        transform: scale(1.1);
-    }
+  .right a:hover img {
+    transform: scale(1.1);
+  }
 
-    .spacer {
-        margin: 0px 15px;
-    }
+  .spacer {
+    margin: 0px 15px;
+  }
 }

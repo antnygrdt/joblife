@@ -76,7 +76,7 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
           </div>}
         </div>
         <div className={"match " + match.status + (unrolled ? ' unrolled' : '')} onClick={() => setUnroll(!unrolled)}>
-          <div className="league">
+          <div className="league" title={match.league + ' ' + match.serie + ' ' + match.tournament}>
             <img src={match.league_avatar} alt={"Logo " + match.league_slug} />
             <p >{match.league_slug}</p>
           </div>
@@ -111,17 +111,18 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
             ))}
           </ul>
           {match.has_details &&
-            <button className='show-details' onClick={() => {
-              navigate('/details', {
-                state: {
-                  match: match,
-                  isUnrolled: isCalendarUnrolled,
-                  filters: calendarFilters,
-                  width: document.body.style.width,
-                  height: document.body.style.height
-                }
-              });
-            }}>{`Afficher les statistiques détaillées${!spoil ? ' (spoils)' : ''}`}</button>
+            <button className='show-details'
+              title={`Informations fournies par ${match.game === 'League of Legends' ? 'Leaguepedia' : 'VLRgg'}`} onClick={() => {
+                navigate('/details', {
+                  state: {
+                    match: match,
+                    isUnrolled: isCalendarUnrolled,
+                    filters: calendarFilters,
+                    width: document.body.style.width,
+                    height: document.body.style.height
+                  }
+                });
+              }}>{`Afficher les statistiques détaillées${!spoil ? ' (spoils)' : ''}`}</button>
           }
         </div>
       </div>

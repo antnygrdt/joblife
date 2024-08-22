@@ -1,7 +1,7 @@
 window.addEventListener('contextmenu', function (e) {
-    e.preventDefault();
+  e.preventDefault();
 });
 
-document.addEventListener('dragstart', function (event) {
-    event.preventDefault();
+document.addEventListener('dragstart', function (e) {
+  e.preventDefault();
 });

@@ -12,6 +12,7 @@ const Details = () => {
 
   const [currentGame, setCurrentGame] = useState(0);
   const [category, setCategory] = useState('overview');
+  const [sideFilter, setSideFilter] = useState(0);
   const [hoverGraph, setHoverGraph] = useState(false);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -142,6 +143,22 @@ const Details = () => {
       )
     }
 
+    const SideFilter = () => {
+      return (
+        <div className='side-filter'>
+          <button disabled={sideFilter === 0} onClick={() => { setSideFilter(0) }}>
+            Tout
+          </button>
+          <button disabled={sideFilter === 1} onClick={() => { setSideFilter(1) }}>
+            Attaque
+          </button>
+          <button disabled={sideFilter === 2} onClick={() => { setSideFilter(2) }}>
+            Défense
+          </button>
+        </div>
+      )
+    }
+
     let maxDamage = Math.max(...players.map(p => p.damage));
 
     const PlayerGraph = ({ p, blue }) => {
@@ -150,6 +167,7 @@ const Details = () => {
         <div className='player'>
           <img style={{ border: `2px solid ${p.name === name ? '#fabe0a' : blue ? '#0a96aa' : '#b71d36'}` }} src={p.champion.icon} alt={p.champion.name} title={p.name} />
           <div className='graph' >
+            {/* Todo: Bar anim */}
             <div className='bar' style={{ width: `${percentage / 100 * 600}px`, backgroundColor: blue ? '#1ba9bd' : '#ec2040' }}
               onMouseEnter={() => setHoverGraph(true)} onMouseLeave={() => setHoverGraph(false)}>
             </div>
@@ -164,11 +182,37 @@ const Details = () => {
       );
     };
 
+    const Rounds = ({ rounds }) => {
+      return (
+        <div className='rounds'>
+          <div className='teams'>
+            <span></span>
+            <img className='team' title={teams[0].name} src={teams[0].avatar} alt={teams[0].acronym} />
+            <img className='team' title={teams[1].name} src={teams[1].avatar} alt={teams[1].acronym} />
+          </div>
+
+          {rounds.map((round, index) => (
+            <div key={index} className='round' title={round.score}>
+              <div className='number'>
+                <p>{round.number}</p>
+              </div>
+              <div className={`square ${round.winner === teams[0].name ? round.side : ''}`}>
+                {round.winner === teams[0].name && <img src={`./assets/icones/valorant/${round.winType}.png`} alt={round.winType} title={round.winType} />}
+              </div>
+              <div className={`square ${round.winner === teams[1].name ? round.side : ''}`}>
+                {round.winner === teams[1].name && <img src={`./assets/icones/valorant/${round.winType}.png`} alt={round.winType} title={round.winType} />}
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+
     return <div className='match-details'>
       <div className='upper'>
         <ReturnButton />
         {games.length > 1 && <GameSelector />}
-        <Categories />
+        {match.game === 'League of Legends' ? <Categories /> : <SideFilter />}
       </div>
 
       {match.game === 'League of Legends' ?
@@ -239,7 +283,7 @@ const Details = () => {
                       <div className='item'>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                           <polygon className="cls-1" points="53.63 70.18 49.86 70.18 46.08 70.18 23.43 49.41 38.53 98.5 49.86 98.5 61.19 98.5 76.29 49.41 53.63 70.18" />
-                          <path className="cls-1" d="M70.59,30.53l0-9.43L55.52,2.22H44.19L29.09,21.1l0,9.43H21.54v7.56L45.66,60.86h8.4L78.18,38.09V30.53Zm-15.07.7v6.16a.7.7,0,0,1-.7.7H44.89a.71.71,0,0,1-.7-.7V31.23a.7.7,0,0,0-.7-.7H39.24a.69.69,0,0,1-.7-.7l.08-8a.69.69,0,0,1,.7-.69h4.17a.7.7,0,0,0,.7-.71V14.25a.7.7,0,0,1,.71-.7l5,0,5,0a.7.7,0,0,1,.7.7v6.14a.71.71,0,0,0,.7.71H60.4a.69.69,0,0,1,.7.69l.08,8a.7.7,0,0,1-.7.7H56.22A.71.71,0,0,0,55.52,31.23Z" />
+                          <path className="cls-1" d="M70.59,30.53l0-9.43L55.52,2.22H44.19L29.09,21.1l0,9.43H21.54v7.56L45.66,60.86h8.4L78.18,38.09V30.53Zm-15.07.7v6.16a.7.7,0,0,1-.7.7H44</svg>.89a.71.71,0,0,1-.7-.7V31.23a.7.7,0,0,0-.7-.7H39.24a.69.69,0,0,1-.7-.7l.08-8a.69.69,0,0,1,.7-.69h4.17a.7.7,0,0,0,.7-.71V14.25a.7.7,0,0,1,.71-.7l5,0,5,0a.7.7,0,0,1,.7.7v6.14a.71.71,0,0,0,.7.71H60.4a.69.69,0,0,1,.7.69l.08,8a.7.7,0,0,1-.7.7H56.22A.71.71,0,0,0,55.52,31.23Z" />
                         </svg>
                         <p>{team.towers ?? '?'}</p>
                       </div>
@@ -294,32 +338,82 @@ const Details = () => {
 
         match.game === 'Valorant' ?
           <div className='valorant'>
+            {category === 'overview' ?
+              <div className='overview'>
 
-            <GameSelector />
+                <div className='rounds-container scroll-bar'>
+                  <Rounds rounds={game.rounds.slice(0, 12)} />
+                  <Rounds rounds={game.rounds.slice(12)} />
+                </div>
 
-            {category === 'teams' ?
-              <div className='teams'>
-
+                <div className='stats'>
+                  <div className='teams scroll-bar'>
+                    {teams.map((team, index) => (
+                      <div className="team" key={index}>
+                        <div className='placeholder'>
+                          <div className='item-1'></div>
+                          <p className='item-2' title='Rating'>R</p>
+                          <p className='item-3' title='Average Combat Score'>ACS</p>
+                          <p className='item-4' title='Kills / Deaths / Assists'>K/D/A</p>
+                          <p className='item-5' title='K - D'>+/-</p>
+                          <p className='item-6' title='Kill, Assist, Survive, Trade %'>KAST</p>
+                          <p className='item-7' title='Average Damage per Round'>ADR</p>
+                          <p className='item-8' title='Headshot %'>HS</p>
+                          <p className='item-9' title='First Kills'>FK</p>
+                          <p className='item-10' title='First Deaths'>FD</p>
+                          <p className='item-11' title='FK - FD'>+/-</p>
+                        </div>
+                        <div className='players'>
+                          {team.players.sort((a, b) => {
+                            return b.rating[0] - a.rating[0];
+                          }).map((player, index) => {
+                            const k_d = Math.floor(player.kills[sideFilter] - player.deaths[sideFilter]);
+                            const fk_fd = Math.floor(player.fk[sideFilter] - player.fd[sideFilter]);
+                            return (
+                              <div className='player' key={index} >
+                                <div className='item-1'>
+                                  <img src={player.agentIcon} alt={player.agentName} title={player.agentName} />
+                                  <div>
+                                    <p className='name'>{player.name}</p>
+                                    <p className='acronym'>{teams.find(t => t.name === player.team).acronym}</p>
+                                  </div>
+                                </div>
+                                <p className='item-2 bg'>{player.rating[sideFilter]}</p>
+                                <p className='item-3 bg'>{player.acs[sideFilter]}</p>
+                                <div className='item-4 bg'>
+                                  <p>{player.kills[sideFilter]}</p>
+                                  <span>/</span>
+                                  <p>{player.deaths[sideFilter]}</p>
+                                  <span>/</span>
+                                  <p>{player.assists[sideFilter]}</p>
+                                </div>
+                                <p className='item-5 bg' style={{ color: `${k_d === 0 ? 'white' : k_d > 0 ? '#60bc6d' : '#f6676a'}` }}>{k_d}</p>
+                                <p className='item-6 bg'>{player.kast[sideFilter]}</p>
+                                <p className='item-7 bg'>{player.adr[sideFilter]}</p>
+                                <p className='item-8 bg'>{player.hs[sideFilter]}</p>
+                                <p className='item-9 bg'>{player.fk[sideFilter]}</p>
+                                <p className='item-10 bg'>{player.fd[sideFilter]}</p>
+                                <p className='item-11 bg' style={{ color: `${fk_fd === 0 ? 'white' : fk_fd > 0 ? '#60bc6d' : '#f6676a'}` }}>{fk_fd}</p>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div> :
 
-              category === 'players' ?
-                <div className='players'>
+              <div className='graph'>
 
-                </div> :
-
-                category === 'graph' ?
-                  <div className='graph'>
-
-                  </div> :
-
-                  <div>Erreur</div>
+              </div>
             }
           </div>
 
-          : <div></div>
+          : null
       }
 
-    </div>;
+    </div>
   };
 };
 
