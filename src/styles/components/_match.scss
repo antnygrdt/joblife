@@ -1,239 +1,239 @@
 .match-card {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 
-    .header {
-        display: flex;
-        position: relative;
-        justify-content: center;
-        border-radius: 10px 10px 0 0;
-        background-color: #d66064;
+  .header {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    border-radius: 10px 10px 0 0;
+    background-color: #d66064;
 
-        color: white;
-        font-family: 'Roboto', sans-serif;
-        font-weight: 700;
-        font-size: 14px;
-        letter-spacing: 0.8px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.8px;
 
-        &.matchday {
-            animation: matchday 5s infinite;
-            transform: translateZ(0);
-        }
-
-        .running {
-            display: flex;
-            position: absolute;
-            align-items: center;
-            right: 6px;
-            bottom: 1px;
-            animation: runn 2s infinite;
-        }
-
-        p {
-            margin: 8px 0px;
-        }
+    &.matchday {
+      animation: matchday 5s infinite;
+      transform: translateZ(0);
     }
 
-    .match {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        padding: 4px 0px;
-        background-color: #F0FFFF;
-        border-radius: 0 0 10px 10px;
-        color: black;
-        font-family: 'Josefin Sans', sans-serif;
-        font-weight: 600;
-        height: 30px;
+    .running {
+      display: flex;
+      position: absolute;
+      align-items: center;
+      right: 6px;
+      bottom: 1px;
+      animation: runn 2s infinite;
+    }
 
-        &:hover {
-            cursor: pointer;
-        }
+    p {
+      margin: 8px 0px;
+    }
+  }
 
-        &.unrolled {
-            border-radius: 0px;
-        }
+  .match {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0px;
+    background-color: #F0FFFF;
+    border-radius: 0 0 10px 10px;
+    color: black;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+    height: 30px;
 
-        &:not(.unrolled) {
-            transition: border-radius 0.2s ease-in-out;
-            transition-delay: 0.1s;
-        }
+    &:hover {
+      cursor: pointer;
+    }
 
-        .league,
-        .team,
-        .arrow {
-            display: flex;
-            position: absolute;
-            align-items: center;
+    &.unrolled {
+      border-radius: 0px;
+    }
 
-            transition: transform 0.1s ease-in-out,
-                -webkit-transform 0.1s ease-in-out;
-        }
+    &:not(.unrolled) {
+      transition: border-radius 0.2s ease-in-out;
+      transition-delay: 0.1s;
+    }
 
-        .league {
-            left: 0;
-        }
+    .league,
+    .team,
+    .arrow {
+      display: flex;
+      position: absolute;
+      align-items: center;
 
-        .team {
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Roboto', sans-serif;
-            font-weight: 700;
+      transition: transform 0.1s ease-in-out,
+        -webkit-transform 0.1s ease-in-out;
+    }
 
-            button {
-                border: none;
-                background: none;
-                padding: 0;
+    .league {
+      left: 0;
+    }
 
-                img {
-                    margin: 0;
-                    transition: transform 0.1s ease-in-out;
-                }
+    .team {
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
 
-                &:hover {
-                    cursor: pointer;
-
-                    img {
-                        transform: scale(1.1);
-                    }
-                }
-            }
-        }
-
-        .arrow {
-            align-self: center;
-            padding: 5px;
-            right: 10px;
-        }
-
-        .wl {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
-            width: 50px;
-
-            &.V {
-                color: green;
-            }
-
-            &.D {
-                color: #d66064;
-            }
-        }
+      button {
+        border: none;
+        background: none;
+        padding: 0;
 
         img {
-            width: 28px;
-            height: 28px;
-            object-fit: scale-down;
-            margin: 0 6px;
+          margin: 0;
+          transition: transform 0.1s ease-in-out;
         }
 
-        .teams-hint {
-            width: max-content;
-        }
+        &:hover {
+          cursor: pointer;
 
-        .schedule {
-            font-family: 'Roboto', sans-serif;
-            font-weight: 500;
+          img {
+            transform: scale(1.1);
+          }
         }
-
-        p {
-            font-size: 15px;
-            margin: 0;
-        }
+      }
     }
 
-    .footer {
-        align-items: center;
-        border-radius: 0 0 10px 10px;
-        background-color: #F0FFFF;
-        color: black;
-
-        transition: max-height 0.2s ease-in-out;
-        max-height: 0;
-        overflow: hidden;
-
-        &.unrolled {
-            max-height: 300px;
-        }
-
-        h2.line {
-            border-bottom: 3px solid #000;
-            line-height: 0em;
-            margin-right: 28px;
-            margin-left: 20px;
-
-            span {
-                font-family: 'Aoboshi One', serif;
-                font-size: 14px;
-                background: #F0FFFF;
-                padding: 0 10px;
-            }
-        }
-
-        .game-list {
-            margin: 0;
-            padding: 0px 20px;
-            padding-bottom: 14px;
-            max-height: 160px;
-            list-style-type: none;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: #888888 #f1f1f1;
-        }
-
-        button.show-details {
-            display: inline-block;
-            outline: none;
-            cursor: pointer;
-            font-weight: 600;
-            border-radius: 5px;
-            padding: 10px 16px;
-            margin: 10px 0px;
-            border: 0;
-            color: #fff;
-            background: #d66064;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-
-            &:hover {
-                transition: all .1s ease;
-                box-shadow: 0 0 0 0 #fff, 0 0 0 3px black;
-            }
-        }
+    .arrow {
+      align-self: center;
+      padding: 5px;
+      right: 10px;
     }
+
+    .wl {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      width: 50px;
+
+      &.V {
+        color: green;
+      }
+
+      &.D {
+        color: #d66064;
+      }
+    }
+
+    img {
+      width: 28px;
+      height: 28px;
+      object-fit: scale-down;
+      margin: 0 6px;
+    }
+
+    .teams-hint {
+      width: max-content;
+    }
+
+    .schedule {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+    }
+
+    p {
+      font-size: 15px;
+      margin: 0;
+    }
+  }
+
+  .footer {
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+    background-color: #F0FFFF;
+    color: black;
+
+    transition: max-height 0.2s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+
+    &.unrolled {
+      max-height: 300px;
+    }
+
+    h2.line {
+      border-bottom: 3px solid #000;
+      line-height: 0em;
+      margin-right: 28px;
+      margin-left: 20px;
+
+      span {
+        font-family: 'Aoboshi One', serif;
+        font-size: 14px;
+        background: #F0FFFF;
+        padding: 0 10px;
+      }
+    }
+
+    .game-list {
+      margin: 0;
+      padding: 0px 20px;
+      padding-bottom: 14px;
+      max-height: 160px;
+      list-style-type: none;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #888888 #f1f1f1;
+    }
+
+    button.show-details {
+      display: inline-block;
+      outline: none;
+      cursor: pointer;
+      font-weight: 600;
+      border-radius: 5px;
+      padding: 10px 16px;
+      margin: 10px 0px;
+      border: 0;
+      color: #fff;
+      background: #d66064;
+      font-size: 14px;
+      font-family: 'Poppins', sans-serif;
+
+      &:hover {
+        transition: all .1s ease;
+        box-shadow: 0 0 0 0 #fff, 0 0 0 3px black;
+      }
+    }
+  }
 }
 
 @keyframes matchday {
-    0% {
-        background-color: #d66064;
-    }
+  0% {
+    background-color: #d66064;
+  }
 
-    20% {
-        background-color: #d66064;
-    }
+  20% {
+    background-color: #d66064;
+  }
 
-    50% {
-        background-color: #ec0101;
-    }
+  50% {
+    background-color: #ec0101;
+  }
 
-    80% {
-        background-color: #d66064;
-    }
+  80% {
+    background-color: #d66064;
+  }
 
-    100% {
-        background-color: #d66064;
-    }
+  100% {
+    background-color: #d66064;
+  }
 }
 
 @keyframes runn {
-    0% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
 
-    50% {
-        transform: scale(0.8);
-    }
+  50% {
+    transform: scale(0.8);
+  }
 
-    100% {
-        transform: scale(1);
-    }
+  100% {
+    transform: scale(1);
+  }
 }

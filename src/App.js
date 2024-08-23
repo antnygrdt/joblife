@@ -1,20 +1,20 @@
-import { Suspense, lazy, useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import BottomBar from './components/BottomBar'
+import BottomBar from './components/BottomBar';
 import UpperBar from './components/UpperBar';
 import Settings from './popups/Settings';
 
-import "./styles/index.scss";
-import Welcome from './popups/Welcome';
-import EasterEgg from './popups/EasterEgg';
 import Rosters from './pages/Rosters';
+import EasterEgg from './popups/EasterEgg';
 import Update from './popups/Update';
+import Welcome from './popups/Welcome';
+import "./styles/index.scss";
 
 import { compareVersions } from './Utils';
+import Details from './pages/Details';
 import NewNotification from './popups/NewNotification';
 import Notes from './popups/Notes';
-import Details from './pages/Details';
 
 const Calendar = lazy(() => import('./pages/Calendar'));
 const Twitch = lazy(() => import('./pages/Twitch'));
@@ -91,9 +91,6 @@ function App() {
       });
     }
   }, [isOnline]);
-
-  window.addEventListener('offline', () => setIsOnline(false));
-  window.addEventListener('online', () => setIsOnline(true));
 
   if (isOnline === null) {
     return null;

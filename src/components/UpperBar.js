@@ -34,7 +34,7 @@ const UpperBar = ({ setSettingsOpen, setNotesOpen, setEasterEggOpen }) => {
           <img src="./assets/Joblife-Logo.png" alt="Logo Joblife" onClick={() => easterEgg()} />
         </div>
         <div className='right' >
-          <img src="./assets/icones/notes.png" alt="Notes" title='Notes' onClick={() => setNotesOpen(true)} />
+          <img src="./assets/icones/notes/notes.png" alt="Notes" title='Notes' onClick={() => setNotesOpen(true)} />
           <img className='settings' src="./assets/icones/settings.png" alt="Settings" title='Paramètres' onClick={() => setSettingsOpen(true)} />
         </div>
       </div>

@@ -1,8 +1,8 @@
 .streamer-link {
-    text-decoration: none;
-}
+  text-decoration: none;
+  cursor: default;
 
-.streamer {
+  .streamer {
     margin: 0px 25px;
     margin-top: 10px;
     display: flex;
@@ -16,63 +16,65 @@
     font-family: 'Poppins', sans-serif;
     font-size: 12px;
     transition: transform 0.1s ease-in-out;
-}
 
-.streamer:hover {
-    cursor: pointer;
-    transform: scale(1.05);
-}
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
 
-.streamer .icone {
-    width: 60px;
-    border-radius: 25%;
-    border: 2px solid gray;
-}
+    .icone {
+      width: 60px;
+      border-radius: 25%;
+      border: 2px solid gray;
+    }
 
-.streamer.online .icone {
-    border: 2px solid greenyellow;
-}
+    &.online .icone {
+      border: 2px solid greenyellow;
+    }
 
-.streamer.offline .icone {
-    filter: grayscale(100%);
-}
+    &.offline .icone {
+      filter: grayscale(100%);
+    }
 
-.streamer .infos1 {
-    max-width: 200px;
-    margin-left: 10px
-}
+    &.online .infos2 .viewer-count {
+      display: flex;
+      align-items: center;
+    }
 
-.streamer .infos1 p {
-    margin: 5px;
-}
+    .infos1 {
+      max-width: 200px;
+      margin-left: 10px;
 
-.streamer .infos1 .name {
-    font-weight: 900;
-}
+      p {
+        margin: 5px;
 
-.streamer .infos1 .title-date {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
+        &.name {
+          font-weight: 900;
+        }
+      }
 
-.streamer .infos2 {
-    margin-left: auto;
-    text-align: right;
-}
+      .title-date {
+        display: -webkit-box;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
 
-.streamer .infos2 p {
-    margin: 5px;
-}
+    .infos2 {
+      margin-left: auto;
+      text-align: right;
 
-.streamer.online .infos2 .viewer-count {
-    display: flex;
-    align-items: center;
-}
+      p {
+        margin: 5px;
+      }
 
-.streamer .infos2 .viewer-count img {
-    width: 20px;
-    height: 20px;
-    margin-left: auto;
+      .viewer-count img {
+        width: 20px;
+        height: 20px;
+        margin-left: auto;
+      }
+    }
+  }
 }

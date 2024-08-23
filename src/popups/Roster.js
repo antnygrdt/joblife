@@ -69,9 +69,6 @@ const Roster = ({ roster, members, setOpen }) => {
                 <p>Classement</p>
               </div>
             </li>
-            {/* <li>
-                    <button>Titres</button>
-                    </li> */}
           </ul>
         </div>
 
@@ -142,11 +139,11 @@ const Player = ({ player }) => {
         <div className='infos2'>
           {player.twitch &&
             <a href={'https://twitch.tv/' + player.twitch} target='_blank'>
-              <img src="./assets/icones/twitch.png" alt="" />
+              <img src="./assets/icones/socials/twitch.png" alt="" />
             </a>
           }
           <a href={'https://x.com/' + player.twitter} target='_blank'>
-            <img src="./assets/icones/x.png" alt="" />
+            <img src="./assets/icones/socials/x.png" alt="" />
           </a>
         </div>
       </div>

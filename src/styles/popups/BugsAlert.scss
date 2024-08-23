@@ -1,54 +1,54 @@
 .bugsAlert {
-    form {
-        background-color: #2f2f2f;
-        padding: 20px;
-        border-radius: 8px;
-        width: 300px;
-        margin: auto;
-        color: #f5f5f5;
+  form {
+    background-color: #2f2f2f;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    margin: auto;
+    color: #f5f5f5;
 
-        label {
-            display: block;
-            text-align: left;
+    label {
+      display: block;
+      text-align: left;
 
-            span.required {
-                color: red;
-            }
-        }
-
+      span.required {
+        color: red;
+      }
     }
 
-    input[type="text"],
-    textarea,
-    select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0px 0px 0px;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        background-color: #3c3c3c;
-        color: #f5f5f5;
-    }
+  }
 
-    textarea {
-        height: 80px;
-        resize: none;
-    }
+  input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0px 0px 0px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #3c3c3c;
+    color: #f5f5f5;
+  }
 
-    button,
-    input[type="submit"] {
-        background-color: #6c757d;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        width: 100px;
-    }
+  textarea {
+    height: 80px;
+    resize: none;
+  }
 
-    input[type="submit"]:hover {
-        background-color: #5a6268;
-    }
+  button,
+  input[type="submit"] {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #5a6268;
+  }
 }

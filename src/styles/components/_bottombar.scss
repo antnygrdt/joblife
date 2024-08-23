@@ -19,10 +19,10 @@
 
   .left a {
     margin: 0 5px;
-  }
 
-  .left a:hover img {
-    transform: scale(1.25);
+    &:hover img {
+      transform: scale(1.25);
+    }
   }
 
   .right a:hover img {

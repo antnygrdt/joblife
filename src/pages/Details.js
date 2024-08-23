@@ -161,13 +161,12 @@ const Details = () => {
 
     let maxDamage = Math.max(...players.map(p => p.damage));
 
-    const PlayerGraph = ({ p, blue }) => {
+    const PlayerDamageGraph = ({ p, blue }) => {
       const percentage = p.damage / maxDamage * 100;
       return (
         <div className='player'>
           <img style={{ border: `2px solid ${p.name === name ? '#fabe0a' : blue ? '#0a96aa' : '#b71d36'}` }} src={p.champion.icon} alt={p.champion.name} title={p.name} />
-          <div className='graph' >
-            {/* Todo: Bar anim */}
+          <div className='player-graph' >
             <div className='bar' style={{ width: `${percentage / 100 * 600}px`, backgroundColor: blue ? '#1ba9bd' : '#ec2040' }}
               onMouseEnter={() => setHoverGraph(true)} onMouseLeave={() => setHoverGraph(false)}>
             </div>
@@ -283,12 +282,13 @@ const Details = () => {
                       <div className='item'>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                           <polygon className="cls-1" points="53.63 70.18 49.86 70.18 46.08 70.18 23.43 49.41 38.53 98.5 49.86 98.5 61.19 98.5 76.29 49.41 53.63 70.18" />
-                          <path className="cls-1" d="M70.59,30.53l0-9.43L55.52,2.22H44.19L29.09,21.1l0,9.43H21.54v7.56L45.66,60.86h8.4L78.18,38.09V30.53Zm-15.07.7v6.16a.7.7,0,0,1-.7.7H44</svg>.89a.71.71,0,0,1-.7-.7V31.23a.7.7,0,0,0-.7-.7H39.24a.69.69,0,0,1-.7-.7l.08-8a.69.69,0,0,1,.7-.69h4.17a.7.7,0,0,0,.7-.71V14.25a.7.7,0,0,1,.71-.7l5,0,5,0a.7.7,0,0,1,.7.7v6.14a.71.71,0,0,0,.7.71H60.4a.69.69,0,0,1,.7.69l.08,8a.7.7,0,0,1-.7.7H56.22A.71.71,0,0,0,55.52,31.23Z" />
+                          <path className="cls-1" d="M70.59,30.53l0-9.43L55.52,2.22H44.19L29.09,21.1l0,9.43H21.54v7.56L45.66,60.86h8.4L78.18,38.09V30.53Zm-15.07.7v6.16a.7.7,0,0,1-.7.7H44.19a.71.71,0,0,1-.7-.7V31.23a.7.7,0,0,0-.7-.7H39.24a.69.69,0,0,1-.7-.7l.08-8a.69.69,0,0,1,.7-.69h4.17a.7.7,0,0,0,.7-.71V14.25a.7.7,0,0,1,.71-.7l5,0,5,0a.7.7,0,0,1,.7.7v6.14a.71.71,0,0,0,.7.71H60.4a.69.69,0,0,1,.7.69l.08,8a.7.7,0,0,1-.7.7H56.22A.71.71,0,0,0,55.52,31.23Z" />
                         </svg>
+
                         <p>{team.towers ?? '?'}</p>
                       </div>
                       <div className='item'>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" title='Inhibiteurs'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                           <path className="cls-1" d="M55.41,31.06a2.89,2.89,0,0,0-2-.84H47.72a2.92,2.92,0,0,0-2,.84L31,45.72a2.91,2.91,0,0,0-.85,2.05v5.65a2.91,2.91,0,0,0,1,2.19L45.64,68.33a2.89,2.89,0,0,0,1.91.71h6a2.91,2.91,0,0,0,1.91-.71L70,55.61a2.91,2.91,0,0,0,1-2.19V47.77a2.91,2.91,0,0,0-.85-2.05Z" />
                           <path className="cls-1" d="M49.52,3.65a46,46,0,1,0,46,46A46,46,0,0,0,49.52,3.65Zm0,81.74A35.76,35.76,0,1,1,85.28,49.63,35.76,35.76,0,0,1,49.52,85.39Z" />
                         </svg>
@@ -327,7 +327,7 @@ const Details = () => {
               {teams.map((team, index) => (
                 <div key={index} className='team'>
                   {team.players.map((player) => (
-                    <PlayerGraph key={player.name} p={player} blue={team.side === 'Blue'} />
+                    <PlayerDamageGraph key={player.name} p={player} blue={team.side === 'Blue'} />
                   ))}
                 </div>
               ))}

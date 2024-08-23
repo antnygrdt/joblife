@@ -1,21 +1,21 @@
 .videos-page {
-    color: white;
-    text-align: center;
+  color: white;
+  text-align: center;
 
-    h1 {
-        font-family: 'Aoboshi One', serif;
-        font-size: 24px;
-        margin: 10px 0px;
-    }
+  h1 {
+    font-family: 'Aoboshi One', serif;
+    font-size: 24px;
+    margin: 10px 0px;
+  }
 
-    .video-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+  .video-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 
-        list-style-type: none;
-        max-height: 345px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
+    list-style-type: none;
+    max-height: 345px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }

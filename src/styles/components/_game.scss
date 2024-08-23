@@ -1,44 +1,44 @@
 .game-header,
 .game {
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .game-header {
-    background-color: #1b2c62;
-    color: white;
-    padding: 8px 8px;
+  background-color: #1b2c62;
+  color: white;
+  padding: 8px 8px;
 }
 
 .game {
-    background-color: #dfdfdf;
-    color: black;
-    padding: 10px 8px;
+  background-color: #dfdfdf;
+  color: black;
+  padding: 10px 8px;
 
-    button {
-        border: none;
-        background: none;
-        padding: 0;
+  button {
+    border: none;
+    background: none;
+    padding: 0;
 
-        img {
-            margin: 0;
-            transition: transform 0.1s ease-in-out;
-        }
-
-        &:hover {
-            cursor: pointer;
-
-            img {
-                transform: scale(1.1);
-            }
-        }
+    img {
+      margin: 0;
+      transition: transform 0.1s ease-in-out;
     }
+
+    &:hover {
+      cursor: pointer;
+
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
 }
 
 .game-card p {
-    margin: 0;
-    font-family: 'Kanit', sans-serif;
+  margin: 0;
+  font-family: 'Kanit', sans-serif;
 }

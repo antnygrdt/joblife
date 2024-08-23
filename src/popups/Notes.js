@@ -16,11 +16,11 @@ const Notes = ({ setOpen, updates, notifications }) => {
         header={
           <div className='heading'>
             <button className={page === 'notifications' ? 'selected' : ''} onClick={() => setPage('notifications')}>
-              <img style={{ width: '18px' }} src="assets/icones/notification.png" />
+              <img style={{ width: '18px' }} src="assets/icones/notes/notification.png" />
               Notifications
             </button>
             <button className={page === 'patchs' ? 'selected' : ''} onClick={() => setPage('patchs')}>
-              <img style={{ width: '16px' }} src="assets/icones/update.png" />
+              <img style={{ width: '16px' }} src="assets/icones/notes/update.png" />
               Patchs
             </button>
           </div>
