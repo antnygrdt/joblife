@@ -44,7 +44,7 @@ const Notes = ({ setOpen, updates, notifications }) => {
                 ))}
             </div> :
           notifications.length === 0 ? <p>Aucune notification disponible.</p> :
-            <div className='entries'>
+            <div className='entries scroll-bar'>
               {notifications
                 .sort((a, b) => new Date(b[1].start) - new Date(a[1].start))
                 .map(([key, value], index) => (

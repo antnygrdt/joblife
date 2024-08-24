@@ -31,7 +31,7 @@ const BottomBar = () => {
         <span className="spacer"></span>
         <div className='right'>
           <a href={socials.website} target="_blank">
-            <img src="./assets/icones/joblife-white.png" alt="Logo Joblife" />
+            <img src="./assets/icones/joblife-website.png" alt="Logo Joblife" />
           </a>
         </div>
       </div>
