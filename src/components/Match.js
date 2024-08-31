@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Game from './Game';
 
+moment.locale('fr');
+
 const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, calendarFilters }) => {
   const [unrolled, setUnroll] = useState(isUnrolled);
   const [spoil, setSpoil] = useState(defaultSpoil);
@@ -24,9 +26,12 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
   const isFinished = match.status === "finished";
 
   const date = moment.utc(match.scheduled_at).locale('fr');
-  const now = moment();
+  const now = moment().local();
 
-  const isToday = date.isSame(now, 'day');
+  const isToday = date.year() === now.year() &&
+    date.month() === now.month() &&
+    date.date() === now.date();
+
   const isRunning = match.status === "running";
 
   const duration = moment.duration(now.diff(date));
