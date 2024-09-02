@@ -25,7 +25,7 @@ const BugsAlert = ({ setBugsAlertOpen }) => {
 
             const data = { type, pseudo, message };
 
-            fetch('https://api2.asakicorp.com/joblife/bugs', {
+            fetch('https://api.asakicorp.com/joblife/bugs', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

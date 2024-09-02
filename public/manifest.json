@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Joblife",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Suivez l'actualité des matchs, des nouvelles vidéos, des streams des joueurs et des annonces de l'équipe Joblife.",
   "action": {
     "default_popup": "popup.html",
