@@ -1,6 +1,6 @@
 <div align="center">
 
-[<img height='70' alt='Télécharger pour Chromium' src='https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/iNEddTyWiMfLSwFD6qGq.png'/>](https://chromewebstore.google.com/detail/joblife/edkkgmecnlfglghdloengahhdhbdnceg) [<img height='70' alt='Télécharger pour Firefox' src='https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png'/>](https://addons.mozilla.org/fr/firefox/addon/joblife)
+[<img height='70' alt='Télécharger pour Chromium' src='https://developer.chrome.com/static/docs/webstore/branding/image/206x58-chrome-web-bcb82d15b2486.png?hl=fr'/>](https://chromewebstore.google.com/detail/joblife/edkkgmecnlfglghdloengahhdhbdnceg) [<img height='70' alt='Télécharger pour Firefox' src='https://extensionworkshop.com/assets/img/documentation/publish/get-the-addon-178x60px.dad84b42.png'/>](https://addons.mozilla.org/fr/firefox/addon/joblife)
 
 </div>
 
