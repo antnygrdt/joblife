@@ -7,7 +7,7 @@
 
 <br>
 
-**Joblife** est une équipe e-sport jouant sur League of Legends en Division 2 de la [Ligue Française (LFL)](https://www.division2lol.fr/) et sur Valorant en [Challengers France (VCF)](https://www.vrlfr.gg/fr). Elle est actuellement **double championne de France sur Valorant** et va chercher une place dans la ligue supérieure et européenne [(VCT)](https://valorantesports.com/fr-FR/).
+**Joblife** est une équipe e-sport présente sur League of Legends en [Ligue Française (LFL)](https://www.lollfl.com/) et sur Valorant en [Challengers France (VCL)](https://www.challengersfrance.fr/). Elle est actuellement **double championne de France sur Valorant** et va chercher une place dans la ligue supérieure et européenne [(VCT)](https://valorantesports.com/fr-FR/).
 
 Ce projet est une **extension pour navigateur** destinée aux <span title="Supporters">*Ultras*</span> Joblife pour qu'il puissent suivre l'avancée de leur équipe en toute facilitée.
 
