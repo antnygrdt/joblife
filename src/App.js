@@ -115,28 +115,26 @@ function App() {
     );
   } else return (
     <BrowserRouter>
-      <div>
-        <UpperBar setSettingsOpen={setSettingsOpen} setNotesOpen={setNotesOpen} setEasterEggOpen={setEasterEggOpen} />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<Calendar />} />
-            <Route path="/twitch" element={<Twitch />} />
-            <Route path="/youtube" element={<Youtube />} />
-            <Route path="/rosters" element={<Rosters />} />
-            <Route path="/details" element={<Details />} />
+      <UpperBar setSettingsOpen={setSettingsOpen} setNotesOpen={setNotesOpen} setEasterEggOpen={setEasterEggOpen} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Calendar />} />
+          <Route path="/twitch" element={<Twitch />} />
+          <Route path="/youtube" element={<Youtube />} />
+          <Route path="/rosters" element={<Rosters />} />
+          <Route path="/details" element={<Details />} />
 
-            <Route path="*" element={<Calendar />} />
-          </Routes>
-        </Suspense>
-        <BottomBar />
+          <Route path="*" element={<Calendar />} />
+        </Routes>
+      </Suspense>
+      <BottomBar />
 
-        {notifcationOpen && <NewNotification setOpen={setNotificationOpen} notifications={currentNotifications} />}
-        {updateOpen && <Update setUpdateOpen={setUpdateOpen} updates={updates} />}
-        {welcomeOpen && <Welcome setOpenWelcome={setWelcomeOpen} />}
-        {easterEggOpen && <EasterEgg setEasterEggOpen={setEasterEggOpen} />}
-        {notesOpen && <Notes setOpen={setNotesOpen} updates={updates} notifications={notifications} />}
-        {settingsOpen && <Settings setOpenSettings={setSettingsOpen} />}
-      </div>
+      {notifcationOpen && <NewNotification setOpen={setNotificationOpen} notifications={currentNotifications} />}
+      {updateOpen && <Update setUpdateOpen={setUpdateOpen} updates={updates} />}
+      {welcomeOpen && <Welcome setOpenWelcome={setWelcomeOpen} />}
+      {easterEggOpen && <EasterEgg setEasterEggOpen={setEasterEggOpen} />}
+      {notesOpen && <Notes setOpen={setNotesOpen} updates={updates} notifications={notifications} />}
+      {settingsOpen && <Settings setOpenSettings={setSettingsOpen} />}
     </BrowserRouter>
   );
 }

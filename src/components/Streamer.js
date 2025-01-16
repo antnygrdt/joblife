@@ -16,7 +16,7 @@ const Streamer = ({ streamer }) => {
           <div className='infos2'>
             <div className='viewer-count'>
               {streamer.isStreaming && (
-                <img src="./assets/icones/utilisateur.png" alt="user" />
+                <img src="./assets/icones/user.png" alt="user" />
               )}
               <p>{streamer.isStreaming ? streamer.viewer_count : "Hors ligne"}</p>
             </div>
