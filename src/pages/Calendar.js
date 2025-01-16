@@ -129,6 +129,9 @@ const Calendar = () => {
               <div className={'match-list scroll-bar'}>
                 {Object.values(matchList)
                   .sort((a, b) => {
+                    if (isNaN(new Date(a.scheduled_at))) return 1;
+                    if (isNaN(new Date(b.scheduled_at))) return -1;
+
                     const dateA = new Date(a.scheduled_at);
                     const dateB = new Date(b.scheduled_at);
 

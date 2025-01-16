@@ -25,10 +25,10 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
 
   const isFinished = match.status === "finished";
 
-  const date = moment.utc(match.scheduled_at).locale('fr');
+  const date = match.scheduled_at === "TBD" ? null : moment.utc(match.scheduled_at).locale('fr');
   const now = moment().local();
 
-  const isToday = date.year() === now.year() &&
+  const isToday = date && date.year() === now.year() &&
     date.month() === now.month() &&
     date.date() === now.date();
 
@@ -40,7 +40,9 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
   const hours = duration.asHours();
 
   var dateFormat;
-  if (days > 6 || !isFinished) {
+  if (match.scheduled_at === "TBD") {
+    dateFormat = "TBD - Date pas encore définie";
+  } else if (days > 6 || !isFinished) {
     dateFormat = date.format('dddd D MMMM YYYY').toUpperCase();
   } else if (days >= 1) {
     dateFormat = `Il y a ${Math.floor(days)} jour${Math.floor(days) > 1 ? 's' : ''}`;
@@ -48,7 +50,7 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
     dateFormat = `Il y a ${Math.floor(hours)} heure${Math.floor(hours) > 1 ? 's' : ''}`;
   } else dateFormat = 'Il y a 1 heure';
 
-  const hourFormat = date.format('HH:mm');
+  const hourFormat = date ? date.format('HH:mm') : null;
 
 
   let teamsHint = null, winner = null;
@@ -69,6 +71,10 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
     teamsHint = `${wins1} - ${wins2}`;
   } else {
     teamsHint = hourFormat;
+  }
+
+  if (match.scheduled_at === "TBD") {
+    teamsHint = "VS.";
   }
 
   return (
