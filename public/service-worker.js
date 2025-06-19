@@ -1,8 +1,48 @@
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0,
+      v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+async function generateUUID() {
+  await new Promise(resolve => {
+    chrome.storage.local.get('JOBLIFE_UUID', (result) => {
+      if (result.JOBLIFE_UUID === undefined) {
+        const uuid = uuidv4();
+        chrome.storage.local.set({
+          JOBLIFE_UUID: uuid
+        });
+        resolve(uuid);
+      } else {
+        resolve(result.JOBLIFE_UUID);
+      }
+    });
+  });
+}
+
 chrome.runtime.onStartup.addListener(() => {
   console.log(`WORKER STARTUP`);
 });
 
+async function fetchAPI(endpoint) {
+  const uuid = await generateUUID();
+
+  return fetch(`https://api.asakicorp.com/joblife/${endpoint}`, {
+    method: "GET",
+    cache: "no-store",
+    headers: {
+      'X-JOBLIFE-UUID': uuid,
+      'X-JOBLIFE-PLATFORM': 'Extension',
+      'X-JOBLIFE-PLATFORM-ID': chrome.runtime.id
+    }
+  });
+}
+
 function dp() {
+  generateUUID();
+
   chrome.storage.local.get('JOBLIFE_PARAMETERS', (result) => {
     const jp = result.JOBLIFE_PARAMETERS;
     var dataToUpdate = {};
@@ -27,17 +67,18 @@ function dp() {
 function fs() {
   console.log('requests')
 
-  fetch('https://api.asakicorp.com/joblife/constants')
+  fetchAPI('constants')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({
         JOBLIFE_SOCIALS: data.socials,
-        JOBLIFE_MEMBERS: data.members
+        JOBLIFE_MEMBERS: data.members,
+        JOBLIFE_NOMATCHINFO: data.noMatchInfo,
       });
     })
     .catch(error => { });
 
-  fetch('https://api.asakicorp.com/joblife/twitch')
+  fetchAPI('twitch')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({
@@ -46,7 +87,7 @@ function fs() {
     })
     .catch(error => { });
 
-  fetch('https://api.asakicorp.com/joblife/youtube')
+  fetchAPI('youtube')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({
@@ -55,7 +96,7 @@ function fs() {
     })
     .catch(error => { });
 
-  fetch('https://api.asakicorp.com/joblife/matches')
+  fetchAPI('matches')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({
@@ -64,7 +105,7 @@ function fs() {
     })
     .catch(error => { });
 
-  fetch('https://api.asakicorp.com/joblife/teams')
+  fetchAPI('teams')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({
@@ -73,7 +114,7 @@ function fs() {
     })
     .catch(error => { });
 
-  fetch('https://api.asakicorp.com/joblife/rosters')
+  fetchAPI('rosters')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({
@@ -82,7 +123,7 @@ function fs() {
     })
     .catch(error => { });
 
-  fetch('https://api.asakicorp.com/joblife/standings')
+  fetchAPI('standings')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({
@@ -91,7 +132,7 @@ function fs() {
     })
     .catch(error => { });
 
-  fetch('https://api.asakicorp.com/joblife/security')
+  fetchAPI('security')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({
@@ -101,7 +142,7 @@ function fs() {
     .catch(error => { });
 
   chrome.storage.local.get('LAST_NOTIFICATION', (result) => {
-    fetch('https://api.asakicorp.com/joblife/notification')
+    fetchAPI('notification')
       .then(response => response.json())
       .then(data => {
         if (result.LAST_NOTIFICATION !== undefined && data !== null && Object.keys(data).length !== 0) {
@@ -126,7 +167,7 @@ function fs() {
       .catch(error => { })
   })
 
-  fetch('https://api.asakicorp.com/joblife/notifications')
+  fetchAPI('notifications')
     .then(response => response.json())
     .then(data => {
       chrome.storage.local.set({

@@ -42,3 +42,21 @@ export function parseTextWithUrls(text) {
 export function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
+
+export async function fetchAPI(endpoint) {
+  const uuid = await new Promise(resolve => {
+    chrome.storage.local.get('JOBLIFE_UUID', (result) => {
+      resolve(result.JOBLIFE_UUID);
+    });
+  });
+
+  return fetch(`https://api.asakicorp.com/joblife/${endpoint}`, {
+    method: "GET",
+    cache: "no-store",
+    headers: {
+      'X-JOBLIFE-UUID': uuid,
+      'X-JOBLIFE-PLATFORM': 'Browser',
+      'X-JOBLIFE-PLATFORM-ID': chrome.runtime.id
+    }
+  });
+}

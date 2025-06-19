@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Popup from '../components/Popup';
 import '../styles/popups/Roster.scss';
+import ZoomImage from '../components/ZoomImage';
+import { clamp } from '../Utils';
 
 const Roster = ({ roster, members, setOpen }) => {
 
@@ -26,7 +28,17 @@ const Roster = ({ roster, members, setOpen }) => {
     });
   }, []);
 
-  const standing = Object.entries(standings).find(([key, value]) => key === splits[currentSplit].league_id);
+  const getLeagueId = () => {
+    const leagueId = splits[currentSplit].league_id;
+    if (typeof leagueId === 'string') {
+      return leagueId;
+    } else if (Array.isArray(leagueId)) {
+      return leagueId.find(id => Object.keys(standings).includes(id)) || leagueId[0];
+    }
+    return null;
+  };
+
+  const standing = Object.entries(standings).find(([key, value]) => key === getLeagueId());
 
   return <Popup
     header={<h1 style={{ fontSize: '18px' }}>{roster.name.toUpperCase()}</h1>}
@@ -37,14 +49,17 @@ const Roster = ({ roster, members, setOpen }) => {
       <div className='roster'>
         <div className='select'>
           <select defaultValue={currentSeason} onChange={(event) => {
-            setCurrentSeason(event.target.value);
+            const newSeasonIndex = Number(event.target.value);
+            setCurrentSeason(newSeasonIndex);
+            const newSplits = Object.entries(seasons[newSeasonIndex].splits);
+            setCurrentSplit((prevSplit) => clamp(prevSplit, 0, newSplits.length - 1));
           }}>
             {seasons
               .map((season, index) => (
                 <option key={`ligue-${index}`} value={index}>{season.name}</option>
               ))}
           </select>
-          <select defaultValue={currentSplit} onChange={(event) => {
+          <select value={currentSplit} onChange={(event) => {
             setCurrentSplit(event.target.value);
           }}>
             {splits
@@ -130,7 +145,7 @@ const Player = ({ player }) => {
   return (
     <>
       <div className='player'>
-        <img src={player.avatar} alt={player.nickname} className='icone' />
+        <ZoomImage src={player.avatar} alt={player.nickname} className='icone' />
         <div className='infos1'>
           <p className='nickname'>{player.nickname}</p>
           <p className='name'>{player.name}</p>

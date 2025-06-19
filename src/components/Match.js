@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Game from './Game';
@@ -25,7 +25,7 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
 
   const isFinished = match.status === "finished";
 
-  const date = match.scheduled_at === "TBD" ? null : moment.utc(match.scheduled_at).locale('fr');
+  const date = match.scheduled_at === "TBD" ? null : moment.tz(match.scheduled_at, moment.tz.guess()).locale('fr');
   const now = moment().local();
 
   const isToday = date && date.year() === now.year() &&
@@ -40,6 +40,7 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
   const hours = duration.asHours();
 
   var dateFormat;
+  var fullDateFormat = date ? date.format('dddd D MMMM YYYY').toUpperCase() : '';
   if (match.scheduled_at === "TBD") {
     dateFormat = "TBD - Date pas encore définie";
   } else if (days > 6 || !isFinished) {
@@ -50,8 +51,8 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
     dateFormat = `Il y a ${Math.floor(hours)} heure${Math.floor(hours) > 1 ? 's' : ''}`;
   } else dateFormat = 'Il y a 1 heure';
 
-  const hourFormat = date ? date.format('HH:mm') : null;
 
+  const hourFormat = date ? date.format('HH:mm') : null;
 
   let teamsHint = null, winner = null;
   if (isFinished || isRunning) {
@@ -73,7 +74,7 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
     teamsHint = hourFormat;
   }
 
-  if (match.scheduled_at === "TBD") {
+  if (match.scheduled_at === "TBD" || !match.scheduled_at.includes("T")) {
     teamsHint = "VS.";
   }
 
@@ -81,7 +82,7 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
     <div>
       <div className='match-card' id={match.id}>
         <div className={"header" + (isToday && !isRunning && !isFinished ? " matchday" : "")}>
-          <p>{dateFormat}</p>
+          <p title={dateFormat !== fullDateFormat ? fullDateFormat : ''}>{dateFormat}</p>
           {isRunning && <div className='running '>
             <p title='En cours...'>🔴</p>
           </div>}
@@ -95,7 +96,17 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
             {(isFinished && spoil) &&
               <p className={'wl ' + (match.team1.id === winner.id ? "V" : "D")}>{match.team1.id === winner.id ? "WIN" : "LOSE"}</p>
             }
-            <img src={match.team1.avatar} alt={match.team1.name} title={match.team1.name} />
+            <img
+              src={match.team1.avatar}
+              alt={match.team1.name}
+              title={match.team1.name}
+              onClick={(e) => {
+                if (e.shiftKey) {
+                  navigator.clipboard.writeText(match.team1.id);
+                  e.stopPropagation();
+                }
+              }}
+            />
             {spoil ?
               <p className={"teams-hint"}>{teamsHint}</p> :
               <button onClick={(e) => {
@@ -105,7 +116,17 @@ const Match = ({ match, spoil: defaultSpoil, isUnrolled, isCalendarUnrolled, cal
                 <img style={{ width: '24px', alignSelf: 'center' }} src="assets/icones/eye2.png" alt="Spoils cachés" title='Afficher' />
               </button>
             }
-            <img src={match.team2.avatar} alt={match.team2.name} title={match.team2.name} />
+            <img
+              src={match.team2.avatar}
+              alt={match.team2.name}
+              title={match.team2.name}
+              onClick={(e) => {
+                if (e.shiftKey) {
+                  navigator.clipboard.writeText(match.team2.id);
+                  e.stopPropagation();
+                }
+              }}
+            />
             {(isFinished && spoil) &&
               <p className={'wl ' + (match.team2.id === winner.id ? "V" : "D")}>{match.team2.id === winner.id ? "WIN" : "LOSE"}</p>
             }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { clamp } from '../Utils';
+import { clamp, fetchAPI } from '../Utils';
+import Loading from '../components/Loading';
 
 const Details = () => {
 
@@ -17,12 +18,13 @@ const Details = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [noData, setNoData] = useState(false);
+  const [showReturn, setShowReturn] = useState(false);
 
   useEffect(() => {
     document.body.style.width = '800px';
     document.body.style.height = '600px';
 
-    fetch(`https://api.asakicorp.com/joblife/details/${match.id}`)
+    fetchAPI(`details/${match.id}`)
       .then(response => {
         if (!response.ok) {
           setNoData(true);
@@ -30,16 +32,56 @@ const Details = () => {
         return response.json();
       })
       .then(data => {
-        setData(data);
-        setLoading(false);
+        const imagesToLoad = [];
+
+        Object.values(data.games).forEach(game => {
+          const players = Object.values(match.game === 'League of Legends' ? game.players : game.members);
+
+          players.forEach(player => {
+            if (match.game === 'League of Legends') {
+              imagesToLoad.push(player.champion.icon);
+              imagesToLoad.push(player.keystonerune.icon);
+              player.summoners.forEach(summoner => imagesToLoad.push(summoner.icon));
+              player.items.forEach(item => imagesToLoad.push(item.icon));
+              imagesToLoad.push(player.trinket.icon);
+
+            } else if (match.game === 'Valorant') {
+              imagesToLoad.push(player.agentIcon);
+            }
+          });
+
+          Object.values(game.teams).forEach(team => {
+            imagesToLoad.push(team.avatar);
+          });
+        });
+
+        const loadImage = url => {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = () => resolve(url);
+            img.onerror = () => resolve(url);
+          });
+        };
+
+        Promise.all(imagesToLoad.map(loadImage))
+          .then(() => {
+            setData(data);
+            setLoading(false);
+          });
       })
       .catch(() => {
         setNoData(true);
       });
 
+    const timer = setTimeout(() => {
+      setShowReturn(true);
+    }, 3000);
+
     return () => {
       document.body.style.width = state.width;
       document.body.style.height = state.height;
+      clearTimeout(timer);
     };
   }, []);
 
@@ -48,6 +90,7 @@ const Details = () => {
       <button className='return' onClick={() => navigate('/calendar', {
         state: {
           id: match.id,
+          finished: match.status === 'finished',
           filters: state.filters,
           isUnrolled: state.isUnrolled
         }
@@ -60,17 +103,19 @@ const Details = () => {
   if (noData) {
 
     return <div className='match-details'>
-      <ReturnButton />
-      <p>Aucune donnée supplémentaire n'a été trouvé pour ce match ou une erreur est survenue.</p>
+      <div className='no-data'>
+        <p>Aucune donnée supplémentaire n'a été trouvé pour ce match ou une erreur est survenue.</p>
+        <ReturnButton />
+      </div>
     </div>;
 
   } else if (loading) {
 
     return <div className='match-details'>
-      <ReturnButton />
-      <div className='loading'>
+      <div className='loading-container'>
         <p>Chargement des données...</p>
-        <div className="loader"></div>
+        <Loading size={1} />
+        {showReturn && <ReturnButton />}
       </div>
     </div>;
 
@@ -350,9 +395,15 @@ const Details = () => {
             {category === 'overview' ?
               <div className='overview'>
 
-                <div className='rounds-container scroll-bar'>
-                  <Rounds rounds={game.rounds.slice(0, 12)} />
-                  <Rounds rounds={game.rounds.slice(12)} />
+                <div className='rounds-map-score'>
+                  <div className='rounds-container scroll-bar'>
+                    <Rounds rounds={game.rounds.slice(0, 12)} />
+                    <Rounds rounds={game.rounds.slice(12)} />
+                  </div>
+                  <div className='map-score'>
+                    <p className='map'>{game.map}</p>
+                    <p className='score'>{`${teams[0].acronym} ${teams[0].score} - ${teams[1].score} ${teams[1].acronym}`}</p>
+                  </div>
                 </div>
 
                 <div className='stats'>

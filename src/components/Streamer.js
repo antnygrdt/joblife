@@ -1,8 +1,9 @@
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React from 'react';
 
 const Streamer = ({ streamer }) => {
-  const date = moment.utc(streamer.started_at).locale('fr').format('DD/MM/YYYY');
+
+  const date = moment.tz(streamer.started_at, moment.tz.guess()).locale('fr').format('DD/MM/YYYY');
 
   return (
     <div>

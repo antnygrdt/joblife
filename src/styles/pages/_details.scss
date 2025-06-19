@@ -4,20 +4,54 @@
 
   position: relative;
 
-  .loading {
+  .loading-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px 0px;
+    color: white;
 
-    p {
-      margin: 0;
+
+    .loading {
+      margin-bottom: 20px;
     }
 
-    .loader {
-      width: 10px;
-      height: 10px;
-      margin: 0 15px;
+    p {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.2rem;
+      margin: 0;
+      margin-bottom: 10px;
+    }
+  }
+
+  .return {
+    background: none;
+    border: none;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  .no-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Aoboshi One', sans-serif;
+    font-size: 1.2rem;
+    margin: 40px auto 0;
+    max-width: 550px;
+    text-align: center;
+
+    p {
+      line-height: 1;
+      margin: 0;
+      margin-bottom: 20px;
     }
   }
 
@@ -29,17 +63,6 @@
     position: relative;
     margin: 0 24px;
     margin-top: 12px;
-
-    .return {
-      background: none;
-      border: none;
-      color: white;
-
-      &:hover {
-        cursor: pointer;
-        text-decoration: underline;
-      }
-    }
 
     .game-selector {
       display: flex;
@@ -393,63 +416,81 @@
       margin: 0 24px;
       margin-top: 8px;
 
-      .rounds-container {
-        display: flex;
-        max-height: 400px;
-        overflow-y: auto;
+      .rounds-map-score {
 
-        .rounds {
-          margin-right: 10px;
+        .rounds-container {
+          display: flex;
+          max-height: 400px;
+          overflow-y: auto;
 
-          .teams {
-            display: flex;
-            margin-bottom: 8px;
+          .rounds {
+            margin-right: 10px;
 
-            span {
-              width: 16px;
-            }
-
-            .team {
-              width: 20px;
-              margin: 0 2px;
-              object-fit: scale-down;
-              align-self: center;
-            }
-          }
-
-          .round {
-            display: flex;
-            align-items: center;
-
-            .number {
-              width: 16px;
-              text-align: right;
-            }
-
-            .square {
-              width: 20px;
-              height: 20px;
-              border-radius: 4px;
-              margin: 2px;
-
+            .teams {
               display: flex;
-              justify-content: center;
-              align-items: center;
+              margin-bottom: 8px;
 
-              background-color: #b9b9b9;
-
-              &.defense {
-                background-color: #24b298;
-              }
-
-              &.attack {
-                background-color: #e25d5a;
-              }
-
-              img {
+              span {
                 width: 16px;
               }
+
+              .team {
+                width: 20px;
+                margin: 0 2px;
+                object-fit: scale-down;
+                align-self: center;
+              }
             }
+
+            .round {
+              display: flex;
+              align-items: center;
+
+              .number {
+                width: 16px;
+                text-align: right;
+              }
+
+              .square {
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+                margin: 2px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                background-color: #b9b9b9;
+
+                &.defense {
+                  background-color: #24b298;
+                }
+
+                &.attack {
+                  background-color: #e25d5a;
+                }
+
+                img {
+                  width: 16px;
+                }
+              }
+            }
+          }
+        }
+
+        .map-score {
+          margin: 24px 0 0 18px;
+
+          .map {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+          }
+
+          .score {
+            font-family: 'Poppins', sans-serif;
+            font-size: 12px;
           }
         }
       }

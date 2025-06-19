@@ -16,6 +16,7 @@ const Calendar = () => {
   const fadeKey = useRef(0);
 
   const [spoil, setSpoilData] = useState(false);
+  const [noMatchInfo, setNoMatchInfo] = useState([]);
   const [openFilter, setOpenFilter] = useState(false);
   const [filters, setFilters] = useState({ 'order': 'asc', 'games': 'all', 'leagues': 'all', 'years': 'all' });
   const [filtersOptions, setFiltersOptions] = useState(null);
@@ -34,7 +35,7 @@ const Calendar = () => {
   useEffect(() => {
     const getPropertyValues = (arr, propName) => [...new Set(arr.map(obj => obj[propName]))];
 
-    chrome.storage.local.get(['JOBLIFE_MATCHES', 'JOBLIFE_TEAMS', 'JOBLIFE_SPOIL'], (result) => {
+    chrome.storage.local.get(['JOBLIFE_MATCHES', 'JOBLIFE_TEAMS', 'JOBLIFE_SPOIL', 'JOBLIFE_NOMATCHINFO'], (result) => {
       if (result.JOBLIFE_MATCHES !== undefined) {
         const matches = result.JOBLIFE_MATCHES;
         const games = getPropertyValues(matches, 'game');
@@ -54,10 +55,15 @@ const Calendar = () => {
       if (result.JOBLIFE_SPOIL !== undefined) {
         setSpoil(result.JOBLIFE_SPOIL);
       }
+
+      if (result.JOBLIFE_NOMATCHINFO !== undefined) {
+        setNoMatchInfo(result.JOBLIFE_NOMATCHINFO);
+      }
+
     });
 
     if (state && state.id) {
-      setPage("finished");
+      setPage(state.finished ? "finished" : "coming");
       setFilters(state.filters);
       setIsUnrolled(state.isUnrolled);
       setTimeout(() => {
@@ -122,32 +128,43 @@ const Calendar = () => {
           </div>
 
           <div className={'fade-in'} key={fadeKey.current}>
-            {matchs.length === 0 ?
+            <div className={'calendar-container scroll-bar'}>
+              {matchs.length === 0 ? <p className='no-match-found'>Aucun match n'a été trouvé</p> :
+                <div className="match-list">
+                  {Object.values(matchList)
+                    .sort((a, b) => {
+                      if (isNaN(new Date(a.scheduled_at))) return 1;
+                      if (isNaN(new Date(b.scheduled_at))) return -1;
 
-              <p className='no-match-found'>Aucun match n'a été trouvé</p> :
+                      const dateA = new Date(a.scheduled_at);
+                      const dateB = new Date(b.scheduled_at);
 
-              <div className={'match-list scroll-bar'}>
-                {Object.values(matchList)
-                  .sort((a, b) => {
-                    if (isNaN(new Date(a.scheduled_at))) return 1;
-                    if (isNaN(new Date(b.scheduled_at))) return -1;
+                      return (page === "finished") ? (filters.order === 'asc' ? (dateB - dateA) : (dateA - dateB)) : (dateA - dateB);
+                    })
+                    .map((match) => (
+                      <li key={match.id}>
+                        <Match match={match} spoil={spoil} isUnrolled={state && state.id === match.id ? true : false} isCalendarUnrolled={isUnrolled} calendarFilters={filters} />
+                      </li>
+                    ))
+                  }
+                </div>
+              }
 
-                    const dateA = new Date(a.scheduled_at);
-                    const dateB = new Date(b.scheduled_at);
+              {page === "coming" &&
+                <div className='noMatchInfo'>
+                  {noMatchInfo.length > 0 && noMatchInfo.map((item, index) => (
+                    <div className='noMatchInfo__item' key={index}>
+                      <img src={item.icon} alt="Icon" />
+                      <p>{item.message}</p>
+                    </div>
+                  ))}
+                </div>}
 
-                    return (page === "finished") ? (filters.order === 'asc' ? (dateB - dateA) : (dateA - dateB)) : (dateA - dateB);
-                  })
-                  .map((match) => (
-                    <li key={match.id}>
-                      <Match match={match} spoil={spoil} isUnrolled={state && state.id === match.id ? true : false} isCalendarUnrolled={isUnrolled} calendarFilters={filters} />
-                    </li>
-                  ))
-                }
-                {(!isUnrolled && page == "finished" && matchList.length === maxMatchs) &&
-                  <button style={{ marginBottom: '2px' }} className="show-more-button" onClick={() => setIsUnrolled(true)}>Afficher tous les matchs</button>
-                }
-              </div>
-            }
+              {(!isUnrolled && page == "finished" && matchList.length === maxMatchs) &&
+                <button style={{ marginBottom: '2px' }} className="show-more-button" onClick={() => setIsUnrolled(true)}>Afficher tous les matchs</button>
+              }
+
+            </div>
           </div>
         </div>
       </div>

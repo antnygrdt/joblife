@@ -51,7 +51,7 @@ const Notes = ({ setOpen, updates, notifications }) => {
                   <div key={key}>
                     <div className='notification'>
                       <h3>{value.title}</h3>
-                      {parseTextWithUrls(value.message)}
+                      <p className='message'>{parseTextWithUrls(value.message)}</p>
                       <p className='date'>{moment.utc(value.start).locale('fr').format('[Le] DD/MM/YYYY [à] HH[h]mm')}</p>
                     </div>
                     {index + 1 !== notifications.length && <h2 className='spacer'></h2>}

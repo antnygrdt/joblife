@@ -11,10 +11,11 @@ import Update from './popups/Update';
 import Welcome from './popups/Welcome';
 import "./styles/index.scss";
 
-import { compareVersions } from './Utils';
+import { compareVersions, fetchAPI } from './Utils';
 import Details from './pages/Details';
 import NewNotification from './popups/NewNotification';
 import Notes from './popups/Notes';
+import Loading from './components/Loading';
 
 const Calendar = lazy(() => import('./pages/Calendar'));
 const Twitch = lazy(() => import('./pages/Twitch'));
@@ -33,6 +34,8 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   const [currentNotifications, setCurrentNotifications] = useState([]);
 
+  const [showAppLoading, setShowAppLoading] = useState(false);
+
   function checkInternet() {
     fetch('https://www.google.com', { method: 'HEAD', mode: 'no-cors' })
       .then(() => {
@@ -41,6 +44,8 @@ function App() {
       .catch(() => {
         setIsOnline(false);
       });
+
+    fetchAPI('popup');
   }
 
   useEffect(() => {
@@ -52,13 +57,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (isOnline === null) return;
+    if (isOnline === null) {
+      document.body.style.height = '600px';
 
-    if (!isOnline) {
+    } else if (!isOnline) {
       document.body.style.height = '350px';
 
     } else {
-      document.body.style.height = '750px';
+      document.body.style.height = '600px';
 
       chrome.storage.local.get(['JOBLIFE_WELCOME', 'JOBLIFE_VERSION'], (result) => {
         if (result.JOBLIFE_WELCOME === undefined) {
@@ -68,7 +74,7 @@ function App() {
           });
         }
 
-        fetch('https://api.asakicorp.com/joblife/updates')
+        fetchAPI('updates')
           .then(response => response.json())
           .then(data => {
             setUpdates(data);
@@ -90,10 +96,21 @@ function App() {
         }
       });
     }
+
+    setTimeout(() => {
+      setShowAppLoading(true);
+    }, 500);
   }, [isOnline]);
 
   if (isOnline === null) {
-    return null;
+    // if (!showAppLoading) return null;
+
+    return (
+      <div className='app-loading'>
+        <img src="assets/Joblife-Logo.png" alt="JobLife" />
+        <Loading />
+      </div>
+    )
   } else if (!isOnline) {
     return (
       <div className='no-connection' style={{ height: '350px' }}>
