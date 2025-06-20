@@ -44,11 +44,13 @@ function App() {
       .catch(() => {
         setIsOnline(false);
       });
-
-    fetchAPI('popup');
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      fetchAPI('popup');
+    }, 5000);
+
     checkInternet();
 
     setInterval(() => {

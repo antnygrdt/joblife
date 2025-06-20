@@ -55,7 +55,7 @@ export async function fetchAPI(endpoint) {
     cache: "no-store",
     headers: {
       'X-JOBLIFE-UUID': uuid,
-      'X-JOBLIFE-PLATFORM': 'Browser',
+      'X-JOBLIFE-PLATFORM': 'Extension',
       'X-JOBLIFE-PLATFORM-ID': chrome.runtime.id
     }
   });

@@ -7,7 +7,7 @@ function uuidv4() {
 }
 
 async function generateUUID() {
-  await new Promise(resolve => {
+  return await new Promise(resolve => {
     chrome.storage.local.get('JOBLIFE_UUID', (result) => {
       if (result.JOBLIFE_UUID === undefined) {
         const uuid = uuidv4();
