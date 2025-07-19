@@ -50,7 +50,7 @@ export async function fetchAPI(endpoint) {
     });
   });
 
-  return fetch(`https://api.asakicorp.com/joblife/${endpoint}`, {
+  return fetch(`https://api-joblife.tsuyo.fr/joblife/${endpoint}`, {
     method: "GET",
     cache: "no-store",
     headers: {

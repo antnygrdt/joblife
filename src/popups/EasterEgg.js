@@ -8,7 +8,7 @@ const EasterEgg = ({ setEasterEggOpen }) => {
     audio.volume = 0.05;
     audio.play();
 
-    fetch('https://api.asakicorp.com/joblife/bugs', {
+    fetch('https://api-joblife.tsuyo.fr/joblife/bugs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
