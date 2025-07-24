@@ -47,9 +47,7 @@ function App() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchAPI('popup');
-    }, 5000);
+    fetchAPI('popup');
 
     checkInternet();
 

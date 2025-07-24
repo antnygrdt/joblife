@@ -3,7 +3,7 @@ import React from 'react';
 
 const Streamer = ({ streamer }) => {
 
-  const date = moment.tz(streamer.started_at, moment.tz.guess()).locale('fr').format('DD/MM/YYYY');
+  const date = streamer.started_at ? moment.tz(streamer.started_at, moment.tz.guess()).locale('fr').format('DD/MM/YYYY') : "-";
 
   return (
     <div>

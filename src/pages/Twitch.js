@@ -19,8 +19,13 @@ const Twitch = () => {
 
   if (streamerData.length === 0) return;
   const streamers = streamerData.sort((a, b) => {
+    if (!a.started_at && b.started_at) return 1;
+    if (a.started_at && !b.started_at) return -1;
+    if (!a.started_at && !b.started_at) return 0;
+
     const aStartedAt = moment.utc(a.started_at).locale('fr');
     const bStartedAt = moment.utc(b.started_at).locale('fr');
+
     return bStartedAt - aStartedAt;
   });
 
