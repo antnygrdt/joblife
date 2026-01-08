@@ -1,0 +1,18 @@
+@use "./settings";
+@use "./animations";
+@use "./widgets";
+@use "./components/match";
+@use "./components/navigation";
+@use "./components/bottombar";
+@use "./components/upperbar";
+@use "./components/video";
+@use "./components/streamer";
+@use "./components/game";
+@use "./components/popup";
+@use "./pages/calendar";
+@use "./pages/youtube";
+@use "./pages/twitch";
+@use "./pages/rosters";
+@use "./pages/details";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Aoboshi+One&display=swap&display=swap&family=Roboto&display=swap&family=Montserrat:wght@500&family=Bebas+Neue&family=Comme:wght@700&display=swap');

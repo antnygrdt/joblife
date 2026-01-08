@@ -1,0 +1,92 @@
+.video {
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  p {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 4px 8px;
+    padding-bottom: calc(4px + 6px); // Extra padding to extend beyond rounded corners
+
+    font-size: 10px;
+    color: white;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.4));
+    word-wrap: break-word;
+    font-weight: 500;
+    z-index: 1;
+
+    // Pseudo-element to perfectly cover rounded corners
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: -4px;
+      right: -4px;
+      height: calc(100% + 8px);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+      border-radius: inherit;
+      z-index: -1;
+    }
+  }
+
+  &.video-big {
+    width: 100%;
+    border-radius: 8px;
+
+    p {
+      font-size: 14px;
+      padding: 6px 10px;
+      padding-bottom: calc(6px + 6px); // Extra padding to extend beyond rounded corners
+      border-radius: 0 0 8px 8px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.4));
+
+      &::before {
+        bottom: -4px;
+        left: -4px;
+        right: -4px;
+        height: calc(100% + 8px);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+      }
+    }
+  }
+
+  &.video-small {
+    flex: 1 1 0;
+    min-width: 0;
+    border-radius: 6px;
+
+    p {
+      padding-bottom: calc(4px + 6px); // Extra padding to extend beyond rounded corners
+      border-radius: 0 0 6px 6px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.4));
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &::before {
+        bottom: -3px;
+        left: -3px;
+        right: -3px;
+        height: calc(100% + 6px);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
+      }
+    }
+  }
+}
