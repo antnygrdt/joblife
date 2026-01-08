@@ -1,0 +1,50 @@
+.roster-list {
+  color: white;
+  margin-top: 10px;
+  height: 390px;
+  overflow-y: auto;
+
+  .roster-card {
+    min-height: 60px;
+    margin: 10px 25px 5px 25px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(15, 22, 27);
+    border: 1px solid rgba(255, 255, 255, 0.466);
+    border-radius: 16px;
+    padding: 10px 16px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.1s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+
+    .icone {
+      width: 60px;
+      align-self: center;
+    }
+
+    .infos {
+      max-width: 300px;
+      margin-left: 10px;
+
+      p {
+        margin: 5px;
+      }
+
+      .name {
+        font-weight: 900;
+      }
+
+      .date {
+        display: box;
+        line-clamp: 2;
+        box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+  }
+}

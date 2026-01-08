@@ -1,0 +1,38 @@
+.upper-bar {
+  width: 100%;
+  background-color: #1b2c62;
+  padding: 15px 0px;
+  position: relative;
+  text-align: center;
+
+  .logo {
+    display: inline-block;
+
+    img {
+      width: 40px;
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+
+    img {
+      height: 28px;
+      transition: transform 0.1s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+
+      &.settings {
+        margin-left: 5px;
+        height: 35px;
+      }
+    }
+  }
+}

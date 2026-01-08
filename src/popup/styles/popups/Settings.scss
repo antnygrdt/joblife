@@ -1,0 +1,144 @@
+.settings {
+  font-family: 'Poppins', sans-serif;
+
+  .parameter {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 10px;
+
+    p {
+      font-size: 12px;
+      margin: 0;
+      align-self: center;
+    }
+
+    input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      border: 2px solid #000;
+      border-radius: 4px;
+    }
+
+    select {
+      font-size: 12px;
+      padding: 2px;
+      border-radius: 4px;
+      background-color: #333;
+      color: white;
+      border: 1px solid #555;
+    }
+  }
+
+  .category {
+    padding-left: 12px;
+
+    h2 {
+      margin-top: 15px;
+      margin-bottom: 5px;
+      text-decoration: underline;
+
+      font-size: 18px;
+    }
+  }
+
+  .contact {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 12px;
+
+    h3 {
+      font-size: 14px;
+      margin: 0;
+      text-decoration: underline;
+    }
+
+    a {
+      font-size: 12px;
+      text-decoration: none;
+
+      p {
+        color: #1da1f2;
+        margin: 0;
+      }
+    }
+
+    .bugs {
+      width: 20px;
+      align-self: center;
+      transition: width 0.1s ease-in-out;
+
+      &:hover {
+        width: 25px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .coffee {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    padding: 10px 0px;
+    transition: all .2s ease-in-out;
+    pointer-events: none;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    &.opened {
+      transform: translateY(-250%);
+      pointer-events: auto;
+    }
+
+    .button {
+      align-self: center;
+      transition: transform 0.2s ease-in-out;
+      pointer-events: auto;
+
+      &:hover {
+        transform: scale(1.3);
+        cursor: pointer;
+      }
+
+      i {
+        border-color: white;
+      }
+    }
+
+    .content {
+      height: 100px;
+      background-color: #333;
+      text-align: center;
+
+      position: absolute;
+      bottom: -100px;
+      left: 0;
+      right: 0;
+
+      p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 0px 10px;
+      }
+
+      button {
+        font-family: 'Poppins', sans-serif;
+        background-color: #d66064;
+        border: none;
+        color: white;
+        text-align: center;
+        padding: 4px 8px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition-duration: 0.4s;
+      }
+
+      button:hover {
+        background-color: #af4e52;
+      }
+    }
+  }
+}

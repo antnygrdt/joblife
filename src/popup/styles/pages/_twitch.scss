@@ -1,0 +1,18 @@
+.twitch-page {
+  color: white;
+}
+
+.streamer-list {
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type: none;
+  height: 390px;
+  overflow-y: auto;
+
+  h1 {
+    margin-left: 25px;
+    font-family: 'Aoboshi One', serif;
+    font-size: 18px;
+  }
+}

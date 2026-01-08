@@ -1,0 +1,44 @@
+.newNotifications {
+  .heading {
+    display: flex;
+    align-items: center;
+
+    h2 {
+      position: absolute;
+      left: 16px;
+      margin: 0;
+    }
+
+    h1 {
+      width: 300px;
+      min-height: 30px;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    button {
+      border: none;
+      background: none;
+      height: 30px;
+      margin: 0 10px;
+
+      i {
+        border-color: white;
+      }
+
+      &:disabled {
+        i {
+          border-color: rgb(100, 100, 100);
+        }
+      }
+
+      &:hover:not(:disabled) {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .notification-message {
+    text-align: justify !important;
+  }
+}
